@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+        }
+        .clock-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .clock {
+            font-size: 24px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .zone {
+            font-size: 18px;
+            color: #555;
+        }
+        table {
+            text-align: center;
+            margin: auto;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 15px 30px;
+            border-bottom: 1px solid #eee;
+        }
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .footer {
+            font-size: 14px;
+            color: #777;
+            text-align: center;
+            padding-top: 20px;
+        }
+    </style>
+    <title>Jam Dunia</title>
+</head>
+<body>
+    <div class="container">
+        <div class="clock-container">
+            <div class="title">Jam Dunia</div>
+            <table>
+                <tr>
+                    <td><div class="clock" id="wib"></div></td>
+                    <td><div class="clock" id="wita"></div></td>
+                    <td><div class="clock" id="wit"></div></td>
+                </tr>
+                <tr>
+                    <td><div class="zone">Jakarta, Indonesia</div></td>
+                    <td><div class="zone">Makassar, Indonesia</div></td>
+                    <td><div class="zone">Jayapura, Indonesia</div></td>
+                </tr>
+                <tr>
+                    <td><div class="clock" id="seoul"></div></td>
+                    <td><div class="clock" id="japan"></div></td>
+                    <td><div class="clock" id="dili"></div></td>
+                </tr>
+                <tr>
+                    <td><div class="zone">Seoul, Korea Selatan</div></td>
+                    <td><div class="zone">Tokyo, Jepang</div></td>
+                    <td><div class="zone">Dili, Timor Leste</div></td>
+                </tr>
+                <tr>
+                    <td><div class="clock" id="utc"></div></td>
+                    <td><div class="clock" id="honolulu"></div></td>
+                    <td><div class="clock" id="arab"></div></td>
+                </tr>
+                <tr>
+                    <td><div class="zone">UTC</div></td>
+                    <td><div class="zone">Honolulu, Hawaii</div></td>
+                    <td><div class="zone">Riyadh, Arab Saudi</div></td>
+                </tr>
+            </table>
+            <div class="footer">© Copyright Farid Jamil Official X OpenAI 2023 > All Right Reserved</div>
+        </div>
+    </div>
+    <script>
+        function updateClock() {
+            const now = new Date();
+            // Waktu WIB
+            document.getElementById('wib').innerText = formatTime(now, 'Asia/Jakarta');
+            // Waktu WITA
+            document.getElementById('wita').innerText = formatTime(now, 'Asia/Makassar');
+            // Waktu WIT
+            document.getElementById('wit').innerText = formatTime(now, 'Asia/Jayapura');
+            // Waktu UTC
+            document.getElementById('utc').innerText = formatTime(now, 'UTC');
+            // Waktu Jepang
+            document.getElementById('japan').innerText = formatTime(now, 'Asia/Tokyo');
+            // Waktu Arab Saudi
+            document.getElementById('arab').innerText = formatTime(now, 'Asia/Riyadh');
+            // Waktu Seoul
+            document.getElementById('seoul').innerText = formatTime(now, 'Asia/Seoul');
+            // Waktu Honolulu
+            document.getElementById('honolulu').innerText = formatTime(now, 'Pacific/Honolulu');
+            // Waktu Dili
+            document.getElementById('dili').innerText = formatTime(now, 'Asia/Dili');
+        }
+
+        function formatTime(date, timeZone) {
+            return date.toLocaleTimeString('en-US', { timeZone: timeZone, hour12: false });
+        }
+
+        // Pembaruan jam setiap detik
+        setInterval(updateClock, 1000);
+        // Memastikan jam terupdate saat halaman dimuat
+        updateClock();
+    </script>
+</body>
+</html>
