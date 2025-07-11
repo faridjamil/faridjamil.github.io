@@ -1,254 +1,242 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Portal Website</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <title>Farid Jamil</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <style>
+    /* Custom styles to mimic original layout where Bootstrap defaults differ */
+    .half-height-section {
+      min-height: 700px;
+    }
+    .min-height-800 {
+      min-height: 800px;
+    }
+    .fixed-menu-width {
+      /* Adjust if you want a fixed width for the menu column, otherwise Bootstrap handles it responsively */
+    }
+  </style>
 </head>
-<body class="w3-content" style="max-width:1300px">
+<body>
 
-<!-- First Grid: Logo & About -->
-<div class="w3-row">
-  <div class="w3-half w3-black w3-container w3-center" style="height:700px">
-    <div class="w3-padding-64">
-      <h1>Farid Jamil</h1>
+  <div class="row g-0">
+    <div class="col-md-6 bg-dark text-white text-center d-flex flex-column justify-content-center half-height-section fixed-menu-width">
+      <div class="py-4">
+        <h1 class="display-4">Farid Jamil</h1>
+      </div>
+      <nav class="nav flex-column py-4">
+        <a class="nav-link text-white bg-dark btn rounded-0 text-start py-3 mb-2" href="#">Beranda</a>
+        <a class="nav-link text-white bg-dark btn rounded-0 text-start py-3 mb-2" href="#tentang">Tentang</a>
+        <a class="nav-link text-white bg-dark btn rounded-0 text-start py-3 mb-2" href="#galeri">Galeri</a>
+        <a class="nav-link text-white bg-dark btn rounded-0 text-start py-3 mb-2" href="#pranala">Pranala</a>
+        <a class="nav-link text-white bg-dark btn rounded-0 text-start py-3 mb-2" href="#waktu">Waktu</a>
+        <a class="nav-link text-white bg-dark btn rounded-0 text-start py-3 mb-2" href="#unduh">Unduhan</a>
+      </nav>
     </div>
-    <div class="w3-padding-64">
-      <a href="#" class="w3-button w3-black w3-block w3-hover-blue-grey w3-padding-16">Beranda</a>
-      <a href="#tentang" class="w3-button w3-black w3-block w3-hover-teal w3-padding-16">Tentang</a>
-      <a href="#galeri" class="w3-button w3-black w3-block w3-hover-teal w3-padding-16">Galeri</a>
-      <a href="#pranala" class="w3-button w3-black w3-block w3-hover-teal w3-padding-16">Pranala</a>
-      <a href="#waktu" class="w3-button w3-black w3-block w3-hover-dark-grey w3-padding-16">Waktu</a>
-      <a href="#unduh" class="w3-button w3-black w3-block w3-hover-dark-grey w3-padding-16">Unduhan</a>
-    </div>
-  </div>
-  <div class="w3-half w3-blue-grey w3-container" style="height:700px" id="tentang">
-    <div class="w3-padding-64 w3-center">
-      <h1>Tentang</h1>
-      <img src="images/avatar.jpg" class="w3-margin w3-circle" alt="Person" style="width:30%">
-      <div class="w3-left-align w3-padding-large">
-        <p>Lorem ipusm sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-        <p>Lorem ipusm sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Second Grid: Work & Resume -->
-<div class="w3-row">
-  <div class="w3-half w3-light-grey w3-center" style="min-height:800px" id="galeri">
-    <div class="w3-padding-64">
-      <h2>Galeri</h2>
-      <p>Some of my latest projects.</p>
-    </div>
-    <div class="w3-row">
-      <div class="w3-half">
-        <img src="images/1.jpg" style="width:100%">
-      </div>
-      <div class="w3-half">
-        <img src="images/2.jpg" style="width:100%">
-      </div>
-    </div>
-    <div class="w3-row w3-hide-small">
-      <div class="w3-half">
-        <img src="images/3.jpg" style="width:100%">
-      </div>
-      <div class="w3-half">
-        <img src="images/4.jpg" style="width:100%">
-      </div>
-    </div>
-
-    <div class="w3-row w3-hide-small">
-      <div class="w3-half">
-        <img src="images/5.jpg" style="width:100%">
-      </div>
-      <div class="w3-half">
-        <img src="images/6.jpg" style="width:100%">
-      </div>
-    </div><br>
-    <p>Just call me awesome.</p>
-  </div>
-  <div class="w3-half w3-indigo w3-container" style="min-height:800px" id="pranala">
-    <div class="w3-padding-64 w3-center">
-      <h2>Pranala</h2>
-      <p>A draft from my CV</p>
-      <div class="w3-container w3-responsive">
-        <table class="w3-table">
-          <tr>
-            <th>Year</th>
-            <th>Title</th>
-            <th>Where</th>
-          </tr>
-          <tr class="w3-white">
-            <td>2012-2016</td>
-            <td>The rest is history..</td>
-            <td>Lorem ipsum</td>
-          </tr>
-          <tr>
-            <td>2009-2012</td>
-            <td>Started my own company</td>
-            <td>My Garage</td>
-          </tr>
-          <tr class="w3-white">
-            <td>2008-2009</td>
-            <td>Started working for Lorem</td>
-            <td>London, UK</td>
-          </tr>
-          <tr>
-            <td>2005-2008</td>
-            <td>Degree in Bachelor of Design</td>
-            <td>Harvard, USA</td>
-          </tr>
-          <tr class="w3-white">
-            <td>2002-2005</td>
-            <td>Degree in Bachelor of Business</td>
-            <td>RMIT University, Melbourne, Australia</td>
-          </tr>
-          <tr class="w3-hide-medium">
-            <td>2002-2005</td>
-            <td>Degree in Bachelor of Business</td>
-            <td>RMIT University, Melbourne, Australia</td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="w3-row">
-  <div class="w3-half w3-indigo w3-container" style="min-height:800px" id="waktu">
-      <div class="w3-padding-64 w3-center">
-        <h2>Waktu</h2>
-        <p>A draft from my CV</p>
-        <div class="w3-container w3-responsive">
-          <table class="w3-table">
-            <tr>
-              <th>Year</th>
-              <th>Title</th>
-              <th>Where</th>
-            </tr>
-            <tr class="w3-white">
-              <td>2012-2016</td>
-              <td>The rest is history..</td>
-              <td>Lorem ipsum</td>
-            </tr>
-            <tr>
-              <td>2009-2012</td>
-              <td>Started my own company</td>
-              <td>My Garage</td>
-            </tr>
-            <tr class="w3-white">
-              <td>2008-2009</td>
-              <td>Started working for Lorem</td>
-              <td>London, UK</td>
-            </tr>
-            <tr>
-              <td>2005-2008</td>
-              <td>Degree in Bachelor of Design</td>
-              <td>Harvard, USA</td>
-            </tr>
-            <tr class="w3-white">
-              <td>2002-2005</td>
-              <td>Degree in Bachelor of Business</td>
-              <td>RMIT University, Melbourne, Australia</td>
-            </tr>
-            <tr class="w3-hide-medium">
-              <td>2002-2005</td>
-              <td>Degree in Bachelor of Business</td>
-              <td>RMIT University, Melbourne, Australia</td>
-            </tr>
-          </table>
+    <div class="col-md-6 bg-secondary text-white d-flex flex-column justify-content-center half-height-section" id="tentang">
+      <div class="p-5 text-center">
+        <h1 class="display-4">Tentang</h1>
+        <img src="images/avatar.jpg" class="img-fluid rounded-circle my-4" alt="Person" style="width: 30%;">
+        <div class="text-start px-md-5">
+          <p>Lorem ipsum sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+          <p>Lorem ipsum sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
         </div>
       </div>
     </div>
-    <div class="w3-half w3-indigo w3-container" style="min-height:800px" id="unduh">
-      <div class="w3-padding-64 w3-center">
-        <h2>Unduhan</h2>
-        <p>A draft from my CV</p>
-        <div class="w3-container w3-responsive">
-          <table class="w3-table">
-            <tr>
-              <th>Year</th>
-              <th>Title</th>
-              <th>Where</th>
-            </tr>
-            <tr class="w3-white">
-              <td>2012-2016</td>
-              <td>The rest is history..</td>
-              <td>Lorem ipsum</td>
-            </tr>
-            <tr>
-              <td>2009-2012</td>
-              <td>Started my own company</td>
-              <td>My Garage</td>
-            </tr>
-            <tr class="w3-white">
-              <td>2008-2009</td>
-              <td>Started working for Lorem</td>
-              <td>London, UK</td>
-            </tr>
-            <tr>
-              <td>2005-2008</td>
-              <td>Degree in Bachelor of Design</td>
-              <td>Harvard, USA</td>
-            </tr>
-            <tr class="w3-white">
-              <td>2002-2005</td>
-              <td>Degree in Bachelor of Business</td>
-              <td>RMIT University, Melbourne, Australia</td>
-            </tr>
-            <tr class="w3-hide-medium">
-              <td>2002-2005</td>
-              <td>Degree in Bachelor of Business</td>
-              <td>RMIT University, Melbourne, Australia</td>
-            </tr>
-          </table>
+  </div>
+
+  <div class="row g-0">
+    <div class="col-md-6 bg-light text-center min-height-800 d-flex flex-column align-items-center justify-content-center" id="galeri">
+      <div class="py-5">
+        <h2 class="display-5">Galeri</h2>
+        <p class="lead">Some of my latest projects.</p>
+      </div>
+      <div class="container-fluid">
+        <div class="row g-2 px-md-5">
+          <div class="col-6">
+            <img src="images/1.jpg" class="img-fluid" alt="Image 1">
+          </div>
+          <div class="col-6">
+            <img src="images/2.jpg" class="img-fluid" alt="Image 2">
+          </div>
+          <div class="col-6 d-none d-md-block">
+            <img src="images/3.jpg" class="img-fluid" alt="Image 3">
+          </div>
+          <div class="col-6 d-none d-md-block">
+            <img src="images/4.jpg" class="img-fluid" alt="Image 4">
+          </div>
+          <div class="col-6 d-none d-md-block">
+            <img src="images/5.jpg" class="img-fluid" alt="Image 5">
+          </div>
+          <div class="col-6 d-none d-md-block">
+            <img src="images/6.jpg" class="img-fluid" alt="Image 6">
+          </div>
+        </div>
+      </div>
+      <p class="mt-4 lead">Just call me awesome.</p>
+    </div>
+    <div class="col-md-6 bg-primary text-white d-flex flex-column justify-content-center min-height-800" id="pranala">
+      <div class="py-5 text-center">
+        <h2 class="display-5">Pranala</h2>
+        <p class="lead">A draft from my CV</p>
+        <div class="container-fluid px-md-5">
+          <div class="table-responsive">
+            <table class="table table-primary table-striped table-hover mt-4">
+              <thead>
+                <tr>
+                  <th scope="col">Year</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Where</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2012-2016</td>
+                  <td>The rest is history..</td>
+                  <td>Lorem ipsum</td>
+                </tr>
+                <tr>
+                  <td>2009-2012</td>
+                  <td>Started my own company</td>
+                  <td>My Garage</td>
+                </tr>
+                <tr>
+                  <td>2008-2009</td>
+                  <td>Started working for Lorem</td>
+                  <td>London, UK</td>
+                </tr>
+                <tr>
+                  <td>2005-2008</td>
+                  <td>Degree in Bachelor of Design</td>
+                  <td>Harvard, USA</td>
+                </tr>
+                <tr>
+                  <td>2002-2005</td>
+                  <td>Degree in Bachelor of Business</td>
+                  <td>RMIT University, Melbourne, Australia</td>
+                </tr>
+                <tr class="d-md-none"> <td>2002-2005</td>
+                  <td>Degree in Bachelor of Business</td>
+                  <td>RMIT University, Melbourne, Australia</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
-</div>
+  </div>
 
-<!-- Third Grid: Swing By & Contact -->
-<!--<div class="w3-row">
-  <div class="w3-half w3-dark-grey w3-container w3-center" style="height:700px">
-    <div class="w3-padding-64">
-      <h1>Swing By</h1>
+  <div class="row g-0">
+    <div class="col-md-6 bg-primary text-white d-flex flex-column justify-content-center min-height-800" id="waktu">
+      <div class="py-5 text-center">
+        <h2 class="display-5">Waktu</h2>
+        <p class="lead">A draft from my CV</p>
+        <div class="container-fluid px-md-5">
+          <div class="table-responsive">
+            <table class="table table-primary table-striped table-hover mt-4">
+              <thead>
+                <tr>
+                  <th scope="col">Year</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Where</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2012-2016</td>
+                  <td>The rest is history..</td>
+                  <td>Lorem ipsum</td>
+                </tr>
+                <tr>
+                  <td>2009-2012</td>
+                  <td>Started my own company</td>
+                  <td>My Garage</td>
+                </tr>
+                <tr>
+                  <td>2008-2009</td>
+                  <td>Started working for Lorem</td>
+                  <td>London, UK</td>
+                </tr>
+                <tr>
+                  <td>2005-2008</td>
+                  <td>Degree in Bachelor of Design</td>
+                  <td>Harvard, USA</td>
+                </tr>
+                <tr>
+                  <td>2002-2005</td>
+                  <td>Degree in Bachelor of Business</td>
+                  <td>RMIT University, Melbourne, Australia</td>
+                </tr>
+                <tr class="d-md-none">
+                  <td>2002-2005</td>
+                  <td>Degree in Bachelor of Business</td>
+                  <td>RMIT University, Melbourne, Australia</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="w3-padding-64">
-      <p>..for a cup of coffee, or whatever.</p>
-      <p>Chicago, US</p>
-      <p>+00 1515151515</p>
-      <p>test@test.com</p>
+    <div class="col-md-6 bg-primary text-white d-flex flex-column justify-content-center min-height-800" id="unduh">
+      <div class="py-5 text-center">
+        <h2 class="display-5">Unduhan</h2>
+        <p class="lead">A draft from my CV</p>
+        <div class="container-fluid px-md-5">
+          <div class="table-responsive">
+            <table class="table table-primary table-striped table-hover mt-4">
+              <thead>
+                <tr>
+                  <th scope="col">Year</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Where</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2012-2016</td>
+                  <td>The rest is history..</td>
+                  <td>Lorem ipsum</td>
+                </tr>
+                <tr>
+                  <td>2009-2012</td>
+                  <td>Started my own company</td>
+                  <td>My Garage</td>
+                </tr>
+                <tr>
+                  <td>2008-2009</td>
+                  <td>Started working for Lorem</td>
+                  <td>London, UK</td>
+                </tr>
+                <tr>
+                  <td>2005-2008</td>
+                  <td>Degree in Bachelor of Design</td>
+                  <td>Harvard, USA</td>
+                </tr>
+                <tr>
+                  <td>2002-2005</td>
+                  <td>Degree in Bachelor of Business</td>
+                  <td>RMIT University, Melbourne, Australia</td>
+                </tr>
+                <tr class="d-md-none">
+                  <td>2002-2005</td>
+                  <td>Degree in Bachelor of Business</td>
+                  <td>RMIT University, Melbourne, Australia</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="w3-half w3-teal w3-container" style="height:700px">
-    <div class="w3-padding-64 w3-padding-large">
-      <h1>Contact</h1>
-      <p class="w3-opacity">GET IN TOUCH</p>
-      <form class="w3-container w3-card w3-padding-32 w3-white" action="/action_page.php" target="_blank">
-        <div class="w3-section">
-          <label>Name</label>
-          <input class="w3-input" style="width:100%;" type="text" required name="Name">
-        </div>
-        <div class="w3-section">
-          <label>Email</label>
-          <input class="w3-input" style="width:100%;" type="text" required name="Email">
-        </div>
-        <div class="w3-section">
-          <label>Message</label>
-          <input class="w3-input" style="width:100%;" type="text" required name="Message">
-        </div>
-        <button type="submit" class="w3-button w3-teal w3-right">Send</button>
-      </form>
-    </div>
-  </div>
-</div>-->
 
-<!-- Footer -->
-<footer class="w3-container w3-black w3-padding-16">
-  <p>Copyright Farid Jamil Official 2024 | Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-</footer>
+  <footer class="bg-dark text-white text-center py-3">
+    <p class="mb-0">Copyright Farid Jamil Official 2024 | Powered by <a href="https://getbootstrap.com/" target="_blank" class="text-white">Bootstrap</a></p>
+  </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcqSVbQyF5n78i8u+E" crossorigin="anonymous"></script>
 </body>
 </html>
