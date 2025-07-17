@@ -1,0 +1,56 @@
+indicator.style.display = 'block';
+            
+            if (strength <= 2) {
+                indicator.className = 'strength-indicator strength-weak';
+                strengthText.textContent = 'Lemah';
+            } else if (strength <= 4) {
+                indicator.className = 'strength-indicator strength-medium';
+                strengthText.textContent = 'Sedang';
+            } else if (strength <= 5) {
+                indicator.className = 'strength-indicator strength-strong';
+                strengthText.textContent = 'Kuat';
+            } else {
+                indicator.className = 'strength-indicator strength-very-strong';
+                strengthText.textContent = 'Sangat Kuat';
+            }
+        }
+
+        // Copy password function
+        function copyPassword() {
+            const passwordOutput = document.getElementById('passwordOutput');
+            
+            if (!passwordOutput.value) {
+                showToast('Generate password terlebih dahulu!', 'error');
+                return;
+            }
+
+            passwordOutput.select();
+            passwordOutput.setSelectionRange(0, 99999); // For mobile devices
+
+            try {
+                navigator.clipboard.writeText(passwordOutput.value);
+                showToast('Password berhasil disalin!');
+            } catch (err) {
+                document.execCommand('copy');
+                showToast('Password berhasil disalin!');
+            }
+        }
+
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = toast ${type === 'error' ? 'error' : ''} show;
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Generate initial password on load
+        window.onload = function() {
+            generatePassword();
+        };
+    </script>
+</body>
+</html>
