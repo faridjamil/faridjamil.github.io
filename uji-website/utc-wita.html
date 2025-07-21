@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Converter
+</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+background-color: #f4f4f4;
+margin: 0;
+padding: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+}
+.container {
+background-color: #fff;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+text-align: center;
+}
+h1 {
+margin-bottom: 20px;
+}
+label {
+display: block;
+margin-bottom: 10px;
+}
+input {
+margin-bottom: 20px;
+padding: 10px;
+width: 100%;
+box-sizing: border-box;
+}
+button {
+padding: 10px 20px;
+background-color: #007BFF;
+color: #fff;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+button:hover {
+background-color: #0056b3;
+}
+#result {
+margin-top: 20px;
+font-size: 1.2em;
+color: #333;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>UTC to WITA Time Converter
+</h1>
+
+<form id="timeForm">
+    
+<label for="utcTime">Enter UTC Time (HH:MM):
+</label>
+    
+<input type="time" id="utcTime" required>
+    
+<button type="button" onclick="convertTime()">Convert to WITA
+</button>
+</form>
+<div id="result">
+</div>
+</div>
+<script>
+function convertTime() {
+const utcTimeInput = document.getElementById('utcTime').value;
+if (!utcTimeInput) {
+document.getElementById('result').textContent = 'Please enter a valid UTC time.';
+return;
+}
+const utcTime = new Date(`1970-01-01T${utcTimeInput}Z`);
+const witaTime = new Date(utcTime.getTime() + 8 * 60 * 60 * 1000);
+const hours = ('0' + witaTime.getUTCHours()).slice(-2);
+const minutes = ('0' + witaTime.getUTCMinutes()).slice(-2);
+const formattedWitaTime = `${hours}:${minutes}`;
+document.getElementById('result').textContent = `WITA Time: ${formattedWitaTime}`;
+}
+</script>
+</body>
+</html>

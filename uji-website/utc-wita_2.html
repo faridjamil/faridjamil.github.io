@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Konverter Waktu UTC-WITA</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+text-align: center;
+}
+</style>
+</head>
+<body>
+<h1>Konverter Waktu UTC-WITA</h1>
+<label for="utcTime">Waktu UTC:</label>
+<input type="text" id="utcTime">
+<button onclick="convert()">Konversi</button>
+<p id="witaTime"></p>
+<script>
+function convert() {
+const utcTimeInput = document.getElementById('utcTime').value;
+const utcTime = parseInt(utcTimeInput);
+// Selisih waktu UTC dan WITA adalah 8 jam
+const witaTime = utcTime + 8;
+document.getElementById('witaTime').textContent = `Waktu WITA: ${witaTime}`;
+}
+</script>
+</body>
+</html>
