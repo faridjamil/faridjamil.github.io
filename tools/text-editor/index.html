@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Editor Website</title>
+    <style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #f4f4f4;
+		}
+
+        h1 {
+            text-align: center;
+        }
+        
+		main {
+			max-width: 800px;
+			margin: 0 auto;
+            margin-top: 30px;
+			padding: 2rem;
+			background-color: #fff;
+			border-radius: 5px;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+		}
+
+		textarea {
+			width: 98%;
+			height: 300px;
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			margin-bottom: 10px;
+            resize: none;
+		}
+
+		button {
+			padding: 10px 20px;
+			background-color: #333;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+    <main>
+        <h1>Text Editor</h1>
+        <textarea id="editor"></textarea>
+        <input type="file" id="fileInput" style="display: none;" accept=".txt" />
+        <button onclick="openFile()">Buka</button>
+        <button id="saveButton">Simpan</button>
+    </main>
+    <script>
+		const fileInput = document.getElementById('fileInput');
+		const editor = document.getElementById('editor');
+		const saveButton = document.getElementById('saveButton');
+
+		fileInput.addEventListener('change', function() {
+			const file = fileInput.files[0];
+			const reader = new FileReader();
+
+			reader.onload = function(e) {
+				const content = e.target.result;
+				editor.value = content;
+			};
+
+			reader.readAsText(file);
+		});
+
+		document.getElementById('saveButton').addEventListener('click', function() {
+          var text = document.getElementById('editor').value;
+          var filename = 'saved_text.txt';
+
+          var element = document.createElement('a');
+          element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+          element.setAttribute('download', filename);
+
+          element.style.display = 'none';
+          document.body.appendChild(element);
+
+          element.click();
+
+          document.body.removeChild(element);
+        });
+        
+        function openFile() {
+            var fileInput = document.getElementById("fileInput");
+
+            // Trigger a click on the file input to open the file dialog
+            fileInput.click();
+
+            // Add an event listener to handle the selected file
+            fileInput.addEventListener('change', function() {
+                var selectedFile = fileInput.files[0];
+
+                if (selectedFile) {
+                    var reader = new FileReader();
+
+                    // Read the content of the file
+                    reader.onload = function(e) {
+                        var fileContent = e.target.result;
+
+                        // Display the file content in the textarea
+                        document.getElementById("htmlCode").value = fileContent;
+                    };
+
+                    reader.readAsText(selectedFile);
+                }
+            });
+        }
+        
+	</script>
+</body>
+</html>
