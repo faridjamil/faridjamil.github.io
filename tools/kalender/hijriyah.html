@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanggal Hijriyah Dinamis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            color: #666;
+        }
+		 #hijriDate{
+			font-weight:bold;
+		 }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Tanggal Hijriyah Dinamis</h1>
+        <p>Tanggal Hijriyah hari ini adalah: <span id="hijriDate"></span>
+        </p>
+    </div>
+    <script>
+        function updateHijriDate() {
+            const today = new Date();
+            const options = {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                weekday: 'long',
+                calendar: 'islamic'
+            };
+            const hijriDate = today.toLocaleDateString('id-ID', options);
+
+            document.getElementById('hijriDate').textContent = hijriDate;
+        }
+
+        // Panggil fungsi untuk pertama kali
+        updateHijriDate();
+
+        // Update setiap 1 detik
+        setInterval(updateHijriDate, 1000);
+    </script>
+</body>
+
+</html>

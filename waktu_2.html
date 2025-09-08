@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jam Dunia
+</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+margin: 0;
+padding: 0;
+background-color: #f0f8ff;
+color: #333;
+}
+header {
+background-color: #1e90ff;
+color: white;
+text-align: center;
+padding: 5px 0;
+}
+main {
+padding: 20px;
+}
+#time-zones {
+display: flex;
+flex-direction: column;
+gap: 20px;
+align-items: center;
+}
+.row {
+display: flex;
+justify-content: space-around;
+width: 100%;
+max-width: 800px;
+}
+.clock {
+border: 1px solid #1e90ff;
+border-radius: 8px;
+padding: 10px;
+background-color: white;
+width: 30%;
+text-align: center;
+font-size: 1.2rem;
+}
+footer {
+background-color: #1e90ff;
+color: white;
+text-align: center;
+padding: 10px 0;
+}
+</style>
+</head>
+<body>
+<header>
+<h1>Jam Dunia</h1>
+</header>
+<main>
+<section id="time-zones">
+<div class="row">
+
+<div class="clock">
+	<h3><div id="WIB"></div></h3>
+	<h4 style="font-weight: normal; margin-top: -20px;">WIB<br>(Jakarta, Indonesia)</h4>
+</div>
+
+<div class="clock">
+	<h3><div id="WITA"></div></h3>
+	<h4 style="font-weight: normal; margin-top: -20px;">WITA<br>(Makassar, Indonesia)</h4>
+</div>
+
+<div class="clock">
+	<h3><div id="WIT" ></div></h3>
+	<h4 style="font-weight: normal; margin-top: -20px;">WIT<br>(Jayapura, Indonesia)</h4>
+</div>
+
+</div>
+<div class="row">
+
+<div class="clock">
+	<h3><div id="UTC"></div></h3>
+	<h4 style="font-weight: normal; margin-top: -20px;">UTC</h4>
+</div>
+
+<div class="clock">
+	<h3><div id="Riyadh"></div></h3>
+	<h4 style="font-weight: normal; margin-top: -20px;">Riyadh, Arab Saudi</h4>
+</div>
+
+<div class="clock">
+	<h3><div id="Tokyo"></div></h3>
+	<h4 style="font-weight: normal; margin-top: -20px;">Tokyo, Jepang</h4>
+</div>
+
+</div>
+<div class="row">
+
+<div class="clock">
+	<h3><div id="Seoul"></div></h3>
+	<h4 style="font-weight: normal; margin-top: -20px;">Seoul, Korea Selatan</h4>
+</div>
+
+<div class="clock">
+	<h3><div id="Manila"></div></h3>
+	<h4 style="font-weight: normal; margin-top: -20px;">Manila, Filipina</h4>
+</div>
+
+<div class="clock">
+	<h3><div id="Dili"></div></h3>
+	<h4 style="font-weight: normal; margin-top: -20px;">Dili, Timor Leste</h4>
+</div>
+
+</div>
+</section>
+</main>
+<footer>
+<p>&copy; 2024 Jam Dunia
+</p>
+</footer>
+<script>
+function updateTime() {
+const timeZones = {
+WIB: "Asia/Jakarta",
+WITA: "Asia/Makassar",
+WIT: "Asia/Jayapura",
+UTC: "UTC",
+Riyadh: "Asia/Riyadh",
+Tokyo: "Asia/Tokyo",
+Seoul: "Asia/Seoul",
+Manila: "Asia/Manila",
+Dili: "Asia/Dili"
+};
+Object.entries(timeZones).forEach(([id, timeZone]) => {
+const currentTime = new Date().toLocaleString("id-ID", {
+timeZone: timeZone,
+timeStyle: "medium",
+hourCycle: "h23"
+});
+document.getElementById(id).textContent = `${currentTime}`;
+});
+}
+setInterval(updateTime, 1000);
+updateTime();
+</script>
+</body>
+</html>

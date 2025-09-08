@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jam & Kalender
+</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+margin: 0;
+padding: 0;
+background-color: #f0f8ff;
+color: #333;
+}
+header {
+background-color: #1e90ff;
+color: white;
+text-align: center;
+padding: 10px 0;
+}
+main {
+padding: 20px;
+text-align: center;
+}
+#time {
+display: flex;
+justify-content: space-around;
+margin-bottom: 20px;
+}
+.clock {
+border: 1px solid #1e90ff;
+border-radius: 8px;
+padding: 10px;
+background-color: white;
+width: 30%;
+}
+#calendar {
+margin: 20px 0;
+border: 1px solid #1e90ff;
+border-radius: 8px;
+padding: 10px;
+background-color: white;
+}
+footer {
+background-color: #1e90ff;
+color: white;
+text-align: center;
+padding: 10px 0;
+}
+</style>
+</head>
+<body>
+<header>
+<h1>Jam & Kalender
+</h1>
+</header>
+<main>
+
+<!--<section id="hijriyah-calendar">
+</section> -->
+
+<section id="time">
+	<div class="clock">
+		Kalender Masehi
+	</div>
+	<div class="clock">
+		Kalender Hijriyah
+	</div>
+</section>
+<section id="time">
+	<div class="clock">
+		<div id="masehi-calendar" style="font-size: 25px; font-weight: bold;"></div>
+	</div>
+	<div class="clock">
+		<div id="hijriDate" style="font-size: 25px; font-weight: bold;"></div>
+	</div>
+</section>
+<section id="time">
+	<div id="WIB" class="clock"	style="font-size: 25px; font-weight: bold;"></div>
+	<div id="WITA" class="clock" style="font-size: 25px; font-weight: bold;"></div>
+	<div id="WIT" class="clock" style="font-size: 25px; font-weight: bold;"></div>
+</section>
+<section id="time">
+	<div class="clock">
+		WIB
+	</div>
+	<div class="clock">
+		WITA
+	</div>
+	<div class="clock">
+		WIT
+	</div>
+</section>
+</main>
+<footer>
+<p>&copy; 2024 Jam & Kalender
+</p>
+</footer>
+<script>
+function updateTime() {
+const WIB = new Date().toLocaleString("id-ID", { timeZone: "Asia/Jakarta", timeStyle: "medium", hourCycle: "h23" });
+const WITA = new Date().toLocaleString("id-ID", { timeZone: "Asia/Makassar", timeStyle: "medium", hourCycle: "h23" });
+const WIT = new Date().toLocaleString("id-ID", { timeZone: "Asia/Jayapura", timeStyle: "medium", hourCycle: "h23" });
+document.getElementById('WIB').textContent = `${WIB}`;
+document.getElementById('WITA').textContent = `${WITA}`;
+document.getElementById('WIT').textContent = `${WIT}`;
+}
+function renderMasehiCalendar() {
+const today = new Date();
+const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+document.getElementById('masehi-calendar').textContent = `${today.toLocaleDateString('id-ID', options)} M`;
+}
+/* async function renderHijriyahCalendar() {
+const today = new Date();
+const response = await fetch(`https://api.aladhan.com/v1/gToH?date=${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`);
+const data = await response.json();
+const hijriyah = data.data.hijri;
+// Daftar bulan Hijriyah dalam bahasa Indonesia
+const bulanHijriyahIndonesia = [
+"Muharram", "Safar", "Rabiulawal", "Rabiulakhir", 
+"Jumadilawal", "Jumadilakhir", "Rajab", "Syaban", 
+"Ramadan", "Syawal", "Zulkaidah", "Zulhijah"
+];
+// Ambil nama bulan dalam bahasa Indonesia
+const bulanIndonesia = bulanHijriyahIndonesia[hijriyah.month.number - 1];
+document.getElementById('hijriyah-calendar').textContent = 
+`Kalender Hijriyah: ${hijriyah.day} ${bulanIndonesia} ${hijriyah.year}`;
+} */
+function updateHijriDate() {
+	const today = new Date();
+	const options = {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+		weekday: 'long',
+		calendar: 'islamic'
+	};
+	const hijriDate = today.toLocaleDateString('id-ID', options);
+
+	document.getElementById('hijriDate').textContent = hijriDate;
+}
+
+// Panggil fungsi untuk pertama kali
+updateHijriDate();
+
+// Update setiap 1 detik
+setInterval(updateHijriDate, 1000);
+setInterval(updateTime, 1000);
+renderMasehiCalendar();
+// renderHijriyahCalendar();
+</script>
+</body>
+</html>
