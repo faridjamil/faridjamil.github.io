@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini VS Code Editor</title>
+    <!-- Link to Highlight.js for code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/vs2015.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        header {
+            background-color: #252526;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.2em;
+            color: #ffffff;
+        }
+
+        #download-btn {
+            background-color: #007acc;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        #download-btn:hover {
+            background-color: #005f9e;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #333333;
+            padding: 10px;
+            border-right: 1px solid #3c3c3c;
+            overflow-y: auto;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar li {
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .sidebar li:hover {
+            background-color: #3c3c3c;
+        }
+
+        .sidebar li.active {
+            background-color: #007acc;
+            color: white;
+        }
+
+        .editor-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .tabs {
+            background-color: #252526;
+            display: flex;
+            border-bottom: 1px solid #3c3c3c;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-right: 1px solid #3c3c3c;
+            transition: background-color 0.2s;
+        }
+
+        .tab.active {
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+
+        .editor {
+            flex: 1;
+            display: none;
+            overflow: hidden;
+        }
+
+        .editor.active {
+            display: block;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100%;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border: none;
+            font-family: 'Consolas', monospace;
+            font-size: 14px;
+            padding: 10px;
+            box-sizing: border-box;
+            resize: none;
+            outline: none;
+        }
+
+        .preview-container {
+            flex: 1;
+            background-color: #ffffff;
+            overflow: auto;
+            border-left: 1px solid #3c3c3c;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Modern touches */
+        body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background-color: #3c3c3c;
+            border-radius: 4px;
+        }
+
+        body::-webkit-scrollbar-track {
+            background-color: #252526;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mini VS Code Editor</h1>
+        <button id="download-btn">Download as HTML</button>
+    </header>
+    <div class="main-container">
+        <div class="sidebar">
+            <ul>
+                <li data-tab="html" class="active">HTML</li>
+                <li data-tab="css">CSS</li>
+                <li data-tab="js">JS</li>
+                <li data-tab="preview">Preview</li>
+            </ul>
+        </div>
+        <div class="editor-container">
+            <div class="editor active" id="html-editor">
+                <textarea id="html-code"><h1>Hello, World!</h1></textarea>
+            </div>
+            <div class="editor" id="css-editor">
+                <textarea id="css-code">h1 { color: blue; }</textarea>
+            </div>
+            <div class="editor" id="js-editor">
+                <textarea id="js-code">console.log('Hello from JS!');</textarea>
+            </div>
+            <div class="editor preview-container" id="preview">
+                <iframe id="preview-frame"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching
+        const sidebarItems = document.querySelectorAll('.sidebar li');
+        const editors = document.querySelectorAll('.editor');
+
+        sidebarItems.forEach(item => {
+            item.addEventListener('click', () => {
+                sidebarItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+
+                const tab = item.dataset.tab;
+                editors.forEach(editor => {
+                    editor.classList.remove('active');
+                    if (editor.id === `${tab}-editor` || (tab === 'preview' && editor.id === 'preview')) {
+                        editor.classList.add('active');
+                    }
+                });
+
+                if (tab !== 'preview') {
+                    updatePreview();
+                }
+            });
+        });
+
+        // Update preview
+        function updatePreview() {
+            const html = document.getElementById('html-code').value;
+            const css = document.getElementById('css-code').value;
+            const js = document.getElementById('js-code').value;
+
+            const previewFrame = document.getElementById('preview-frame');
+            const preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
+            preview.open();
+            preview.write(`
+                <html>
+                <head>
+                    <style>${css}</style>
+                </head>
+                <body>
+                    ${html}
+                    <script>${js}<\/script>
+                </body>
+                </html>
+            `);
+            preview.close();
+        }
+
+        // Auto-update preview on code change
+        const textareas = document.querySelectorAll('textarea');
+        textareas.forEach(ta => {
+            ta.addEventListener('input', updatePreview);
+        });
+
+        // Download as HTML
+        document.getElementById('download-btn').addEventListener('click', () => {
+            const html = document.getElementById('html-code').value;
+            const css = document.getElementById('css-code').value;
+            const js = document.getElementById('js-code').value;
+
+            const fullHtml = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exported Page</title>
+    <style>${css}</style>
+</head>
+<body>
+    ${html}
+    <script>${js}<\/script>
+</body>
+</html>
+            `;
+
+            const blob = new Blob([fullHtml], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'exported.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+
+        // Initial preview update
+        updatePreview();
+
+        // Note: Highlight.js is loaded but not initialized here for simplicity. You can add hljs.highlightAll(); if needed for static highlighting, but since it's live editor, it's optional.
+    </script>
+</body>
+</html>
