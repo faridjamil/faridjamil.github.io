@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mini VS Code Web</title>
+  <style>
+    :root {
+      --bg: #1e1e1e;
+      --panel: #252526;
+      --text: #d4d4d4;
+      --accent: #007acc;
+      --border: #3c3c3c;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Consolas', monospace;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header, footer {
+      background-color: var(--panel);
+      padding: 0.8rem 1rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.4rem;
+      color: var(--accent);
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      overflow: hidden;
+    }
+
+    .editor-section {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      padding: 0.5rem;
+      gap: 0.5rem;
+      background-color: var(--panel);
+      border-right: 1px solid var(--border);
+    }
+
+    .editor-section textarea {
+      flex: 1;
+      background-color: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.5rem;
+      resize: none;
+      font-size: 0.9rem;
+    }
+
+    .preview-section {
+      width: 50%;
+      background-color: white;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem;
+    }
+
+    button {
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.4rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    button:hover {
+      background-color: #005f9e;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 0.8rem;
+      color: #aaa;
+    }
+
+    @media (max-width: 768px) {
+      main {
+        flex-direction: column;
+      }
+
+      .editor-section, .preview-section {
+        width: 100%;
+        height: 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🧪 Mini VS Code Web</h1>
+  </header>
+
+  <main>
+    <div class="editor-section">
+      <textarea id="htmlCode" placeholder="HTML..."></textarea>
+      <textarea id="cssCode" placeholder="CSS..."></textarea>
+      <textarea id="jsCode" placeholder="JavaScript..."></textarea>
+      <div class="controls">
+        <button onclick="updatePreview()">🔄 Preview</button>
+        <button onclick="downloadCode()">⬇️ Unduh</button>
+      </div>
+    </div>
+    <div class="preview-section">
+      <iframe id="preview"></iframe>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Dibuat dengan ❤️ oleh Copilot X Farid Jamil</p>
+  </footer>
+
+  <script>
+    const htmlCode = document.getElementById('htmlCode');
+    const cssCode = document.getElementById('cssCode');
+    const jsCode = document.getElementById('jsCode');
+    const preview = document.getElementById('preview');
+
+    function updatePreview() {
+      const html = htmlCode.value;
+      const css = `<style>${cssCode.value}</style>`;
+      const js = `<script>${jsCode.value}<\/script>`;
+      const fullCode = `${html}\n${css}\n${js}`;
+      preview.srcdoc = fullCode;
+    }
+
+    function downloadCode() {
+      const html = htmlCode.value;
+      const css = `<style>${cssCode.value}</style>`;
+      const js = `<script>${jsCode.value}<\/script>`;
+      const fullCode = `<!DOCTYPE html>\n<html>\n<head>\n${css}\n</head>\n<body>\n${html}\n${js}\n</body>\n</html>`;
+      const blob = new Blob([fullCode], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'mini-vscode.html';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    window.addEventListener('DOMContentLoaded', updatePreview);
+    htmlCode.addEventListener('input', updatePreview);
+    cssCode.addEventListener('input', updatePreview);
+    jsCode.addEventListener('input', updatePreview);
+  </script>
+</body>
+</html>
