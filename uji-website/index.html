@@ -1,129 +1,47 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="id">
 <head>
-  <title>Farid Jamil Blog | Uji Website</title>
-  <style>
-	body{
-		margin: 0;
-		padding: 0;
-		padding:10px;
-		background-color: #f1f1f1;
-	}
-	
-	a{
-		text-decoration:none;
-		color:#555;
-	}
-  
-	.container {
-		max-width: 1000px;
-		margin: 20px auto;
-		border: 1px solid #ccc;
-		border-radius: 5px;
-		padding: 40px;
-		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-		background-color: white;
-    }
-  
-    #editor {
-      display: flex;
-      flex-wrap: wrap;
-    }
-    #code-input,
-    #code-output {
-      width: 100%;
-      min-height: 300px;
-      box-sizing: border-box;
-      padding: 10px;
-      font-family: monospace;
-    }
-    #code-input {
-      border-right: 1px solid #ccc;
-    }
-    #run-btn,
-    #save-btn {
-      margin-top: 10px;
-      padding: 8px 16px;
-      background-color: #333;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Surat Yasin — Baca & Terjemahan (Offline)</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-	  <h3 align="center" style="margin-bottom:-15px;">Farid Jamil Uji Website</h3>
-	  <p align="center"><i>yuk... tes hasil websitemu di sini</i></p>
-	  <hr><br>
-	  <table width="100%">
-		<tr>
-			<td width="50%"><h4 align="center">Text Editor</h4></td>
-			<td width="50%"><h4 align="center">Pratinjau</h4></td>
-		</tr>
-		<tr>
-			<td width="50%">
-				<!--<div id="editor">-->
-					<textarea id="code-input" placeholder="Masukkan kode Anda di sini" style="border: 1px solid #333;">
-						<!-- Kode hanya contoh saja, silahkan boleh dihapus -->
-						<html>
-						   <head>
-							 <title>Contoh</title>
-						   </head>
-						   <style>
-							  body{
-								 margin:0;
-								 padding:0;
-								 text-align:center;
-								 color:grey;
-							  }
-						   </style>
-						   <body>
-							  <h1>Dummy Text</h1>
-							  <p>Ipsum dolor sit amet</p>
-						   </body>
-						</html>
-						<!-- Kode hanya contoh saja, silahkan boleh dihapus -->
-					</textarea>
-				<!--</div>-->
-			</td>
-			<td width="50%"><iframe id="code-output" style="border: 1px solid #333;"></iframe></td>
-		</tr>
-	  </table>
-	  <button id="run-btn">Jalankan</button>
-	  <button id="save-btn">Simpan</button>
-	  <!--<br><br><br><hr>
-	  <p align="center">&copy; Farid Jamil Official X <a href="https://chat.openai.com">OpenAI</a> 2023 / All right reserved</p>-->
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand">
+      <h1>Surat <span>Yā Sīn</span></h1>
+      <p class="subtitle">Baca Al-Qur’an — Arab & Terjemahan Bahasa Indonesia (Offline-ready)</p>
+    </div>
+    <nav class="controls">
+      <input id="search" placeholder="Cari kata dalam ayat..." />
+      <button id="toggleDark" title="Toggle mode">🌓</button>
+      <button id="increase" title="Perbesar font">A+</button>
+      <button id="decrease" title="Perkecil font">A-</button>
+    </nav>
   </div>
+</header>
 
-  <script>
-    const runBtn = document.getElementById('run-btn');
-    const saveBtn = document.getElementById('save-btn');
-    const codeInput = document.getElementById('code-input');
-    const codeOutput = document.getElementById('code-output');
+<main class="container">
+  <section class="surah-intro">
+    <h2 id="surah-title">Yā Sīn (يس)</h2>
+    <p class="meta">Surah 36 — 83 ayat</p>
+    <p class="lead">Klik ayat untuk menyalin teks Arab. Gunakan kotak pencarian untuk menemukan kata dalam ayat atau terjemahan.</p>
+  </section>
 
-    // Jalankan kode
-    runBtn.addEventListener('click', () => {
-      const code = codeInput.value;
-      codeOutput.srcdoc = code;
-    });
-	
-	// kode save file to html
-	document.getElementById('save-btn').addEventListener('click', function() {
-	  var text = document.getElementById('code-input').value;
-	  var filename = 'saved_text.html';
+  <section id="surah-content" class="surah-content" aria-live="polite">
+    <!-- Ayat akan dimuat di sini oleh script.js -->
+    <div class="loading">Memuat ...</div>
+  </section>
+</main>
 
-	  var element = document.createElement('a');
-	  element.setAttribute('href', 'data:text/html;charset=utf-8,' + encodeURIComponent(text));
-	  element.setAttribute('download', filename);
+<footer class="site-footer">
+  <div class="container">
+    <p>Website offline sederhana — font lokal required (letakkan file font di folder <code>/fonts</code>).</p>
+    <p>Designed with ❤️ — export atau modifikasi sesuka Anda.</p>
+  </div>
+</footer>
 
-	  element.style.display = 'none';
-	  document.body.appendChild(element);
-
-	  element.click();
-
-	  document.body.removeChild(element);
-	});
-  </script>
+<script src="script.js"></script>
 </body>
 </html>

@@ -1,0 +1,96 @@
+/* styles.css — modern, responsive, offline-friendly */
+@font-face {
+  font-family: 'LocalArabic';
+  src: url('fonts/Arabic.ttf') format('truetype');
+  /* Replace 'Arabic.ttf' with your preferred local Arabic font file name */
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'LocalSans';
+  src: url('fonts/Sans.ttf') format('truetype');
+  /* Replace 'Sans.ttf' with your preferred local Latin font file name */
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root{
+  --bg:#fbfbff;
+  --card:#ffffff;
+  --muted:#6b7280;
+  --accent:#5b21b6;
+  --radius:14px;
+  --glass: rgba(255,255,255,0.6);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: 'LocalSans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg,var(--bg),#f4f6fb);
+  color:#0f172a;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  padding-bottom:60px;
+}
+
+.container{max-width:980px;margin:0 auto;padding:20px}
+
+.site-header{
+  backdrop-filter: blur(6px);
+  background: linear-gradient(90deg, rgba(91,33,182,0.08), rgba(91,33,182,0.02));
+  position:sticky;top:0;z-index:20;
+  border-bottom:1px solid rgba(0,0,0,0.04);
+}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand h1{margin:6px 0;font-size:20px;letter-spacing:1px}
+.brand h1 span{color:var(--accent)}
+.subtitle{margin:0;font-size:13px;color:var(--muted)}
+
+.controls{display:flex;align-items:center;gap:8px}
+.controls input{padding:8px 12px;border-radius:10px;border:1px solid rgba(16,24,40,0.06);width:220px}
+.controls button{background:transparent;border:1px solid rgba(16,24,40,0.06);padding:8px 10px;border-radius:10px;cursor:pointer}
+
+.surah-intro{padding:18px 0}
+.meta{color:var(--muted);margin:6px 0}
+.lead{margin-top:8px;color:var(--muted)}
+
+.surah-content{display:grid;grid-template-columns:1fr;gap:14px}
+.ayat{
+  background:var(--card);
+  border-radius:12px;
+  padding:16px;
+  box-shadow: 0 6px 18px rgba(16,24,40,0.06);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.ayat:hover{transform:translateY(-4px);box-shadow: 0 14px 30px rgba(16,24,40,0.08)}
+.arabic{font-family:'LocalArabic', 'Amiri', serif; font-size:28px; text-align:right; direction:rtl; line-height:1.6}
+.meta-ayat{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.nomor{background:var(--glass);padding:6px 10px;border-radius:999px;font-weight:600;color:var(--accent)}
+.terjemahan{margin-top:10px;color:#111827;font-size:15px;line-height:1.6}
+.small{color:var(--muted);font-size:13px}
+
+.site-footer{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,0.95);border-top:1px solid rgba(0,0,0,0.04);padding:10px 0;text-align:center}
+
+.loading{padding:40px;text-align:center;color:var(--muted)}
+
+/* responsiveness */
+@media (min-width:720px){
+  .surah-content{grid-template-columns:1fr 1fr}
+  .arabic{font-size:30px}
+}
+@media (min-width:1100px){
+  .surah-content{grid-template-columns:1fr 1fr 1fr}
+  .arabic{font-size:32px}
+}
+
+/* dark mode */
+body.dark{
+  background: #0b1220;
+  color:#e6eef8;
+}
+body.dark .site-footer, body.dark .site-header{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))}
+body.dark .ayat{background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:none}
