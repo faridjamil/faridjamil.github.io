@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asmaul Husna - 99 Nama Allah</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Amiri:wght@700&display=swap" rel="stylesheet">
+    <style>
+       body {
+    font-family: 'Poppins', sans-serif;
+    background: #f0f2f5;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3em;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+p {
+    color: #7f8c8d;
+    font-size: 1.2em;
+    margin-top: 0;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card-number {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #3498db;
+    background: #eaf6fd;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.card-arabic {
+    font-family: 'Amiri', serif;
+    font-size: 2.5em;
+    color: #2c3e50;
+    margin: 10px 0;
+}
+
+.card-transliteration {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.card-meaning {
+    font-size: 0.9em;
+    color: #777;
+}
+
+/* Responsif untuk layar lebih kecil */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5em;
+    }
+
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Asmaul Husna</h1>
+        <p>99 Nama Allah Yang Baik</p>
+        <div class="card-grid" id="asmaul-husna-container">
+            </div>
+    </div>
+    <script>
+      const asmaulHusna = [
+    { number: 1, arabic: "الرَّحْمَنُ", transliteration: "Ar-Rahman", meaning: "Yang Maha Pengasih" },
+    { number: 2, arabic: "الرَّحِيمُ", transliteration: "Ar-Rahim", meaning: "Yang Maha Penyayang" },
+    { number: 3, arabic: "المَلِكُ", transliteration: "Al-Malik", meaning: "Yang Maha Merajai/Memerintah" },
+    { number: 4, arabic: "القُدُّوسُ", transliteration: "Al-Quddus", meaning: "Yang Maha Suci" },
+    { number: 5, arabic: "السَّلاَمُ", transliteration: "As-Salam", meaning: "Yang Maha Memberi Kesejahteraan" },
+    { number: 6, arabic: "المُؤْمِنُ", transliteration: "Al-Mu'min", meaning: "Yang Maha Memberi Keamanan" },
+    { number: 7, arabic: "المُهَيْمِنُ", transliteration: "Al-Muhaimin", meaning: "Yang Maha Mengatur dan Mengawasi" },
+    { number: 8, arabic: "العَزِيزُ", transliteration: "Al-'Aziz", meaning: "Yang Maha Perkasa" },
+    { number: 9, arabic: "الجَبَّارُ", transliteration: "Al-Jabbar", meaning: "Yang Maha Memaksa" },
+    { number: 10, arabic: "المُتَكَبِّرُ", transliteration: "Al-Mutakabbir", meaning: "Yang Maha Megah/Maha Memiliki Kebesaran" },
+    { number: 11, arabic: "الخَالِقُ", transliteration: "Al-Khaliq", meaning: "Yang Maha Menciptakan" },
+    { number: 12, arabic: "البَارِئُ", transliteration: "Al-Bari'", meaning: "Yang Maha Mengadakan (dari tiada)" },
+    { number: 13, arabic: "المُصَوِّرُ", transliteration: "Al-Musawwir", meaning: "Yang Maha Membentuk Rupa" },
+    { number: 14, arabic: "الغَفَّارُ", transliteration: "Al-Ghaffar", meaning: "Yang Maha Pengampun" },
+    { number: 15, arabic: "القَهَّارُ", transliteration: "Al-Qahhar", meaning: "Yang Maha Memaksa/Menaklukkan" },
+    { number: 16, arabic: "الوَهَّابُ", transliteration: "Al-Wahhab", meaning: "Yang Maha Pemberi Karunia" },
+    { number: 17, arabic: "الرَّزَّاقُ", transliteration: "Ar-Razzaq", meaning: "Yang Maha Pemberi Rezeki" },
+    { number: 18, arabic: "الفَتَّاحُ", transliteration: "Al-Fattah", meaning: "Yang Maha Pembuka (Rahmat)" },
+    { number: 19, arabic: "العَلِيمُ", transliteration: "Al-'Alim", meaning: "Yang Maha Mengetahui" },
+    { number: 20, arabic: "القَابِضُ", transliteration: "Al-Qabidh", meaning: "Yang Maha Menyempitkan (Rezeki)" },
+    { number: 21, arabic: "البَاسِطُ", transliteration: "Al-Basith", meaning: "Yang Maha Melapangkan (Rezeki)" },
+    { number: 22, arabic: "الخَافِضُ", transliteration: "Al-Khafid", meaning: "Yang Maha Merendahkan" },
+    { number: 23, arabic: "الرَّافِعُ", transliteration: "Ar-Rafi'", meaning: "Yang Maha Meninggikan" },
+    { number: 24, arabic: "المُعِزُّ", transliteration: "Al-Mu'izz", meaning: "Yang Maha Memuliakan" },
+    { number: 25, arabic: "المُذِلُّ", transliteration: "Al-Mudzill", meaning: "Yang Maha Menghinakan" },
+    { number: 26, arabic: "السَّمِيعُ", transliteration: "As-Sami'", meaning: "Yang Maha Mendengar" },
+    { number: 27, arabic: "البَصِيرُ", transliteration: "Al-Bashir", meaning: "Yang Maha Melihat" },
+    { number: 28, arabic: "الحَكَمُ", transliteration: "Al-Hakam", meaning: "Yang Maha Menetapkan Hukum" },
+    { number: 29, arabic: "العَدْلُ", transliteration: "Al-'Adl", meaning: "Yang Maha Adil" },
+    { number: 30, arabic: "اللَّطِيفُ", transliteration: "Al-Lathif", meaning: "Yang Maha Lembut" },
+    { number: 31, arabic: "الخَبِيرُ", transliteration: "Al-Khabir", meaning: "Yang Maha Mengetahui (Rahasia)" },
+    { number: 32, arabic: "الحَلِيمُ", transliteration: "Al-Halim", meaning: "Yang Maha Santun" },
+    { number: 33, arabic: "العَظِيمُ", transliteration: "Al-'Azhim", meaning: "Yang Maha Agung" },
+    { number: 34, arabic: "الغَفُورُ", transliteration: "Al-Ghafur", meaning: "Yang Maha Pengampun" },
+    { number: 35, arabic: "الشَّكُورُ", transliteration: "Asy-Syakur", meaning: "Yang Maha Berterima Kasih" },
+    { number: 36, arabic: "العَلِيُّ", transliteration: "Al-'Aliyy", meaning: "Yang Maha Tinggi" },
+    { number: 37, arabic: "الكَبِيرُ", transliteration: "Al-Kabir", meaning: "Yang Maha Besar" },
+    { number: 38, arabic: "الحَفِيظُ", transliteration: "Al-Hafizh", meaning: "Yang Maha Memelihara" },
+    { number: 39, arabic: "المُقِيتُ", transliteration: "Al-Muqit", meaning: "Yang Maha Pemberi Kekuatan" },
+    { number: 40, arabic: "الحَسِيبُ", transliteration: "Al-Hasib", meaning: "Yang Maha Menghitung" },
+    { number: 41, arabic: "الجَلِيلُ", transliteration: "Al-Jalil", meaning: "Yang Maha Mulia" },
+    { number: 42, arabic: "الكَرِيمُ", transliteration: "Al-Karim", meaning: "Yang Maha Pemurah" },
+    { number: 43, arabic: "الرَّقِيبُ", transliteration: "Ar-Raqib", meaning: "Yang Maha Mengawasi" },
+    { number: 44, arabic: "المُجِيبُ", transliteration: "Al-Mujib", meaning: "Yang Maha Mengabulkan" },
+    { number: 45, arabic: "الوَاسِعُ", transliteration: "Al-Wasi'", meaning: "Yang Maha Luas" },
+    { number: 46, arabic: "الحَكِيمُ", transliteration: "Al-Hakim", meaning: "Yang Maha Bijaksana" },
+    { number: 47, arabic: "الوَدُودُ", transliteration: "Al-Wadud", meaning: "Yang Maha Mencintai" },
+    { number: 48, arabic: "المَجِيدُ", transliteration: "Al-Majid", meaning: "Yang Maha Mulia" },
+    { number: 49, arabic: "البَاعِثُ", transliteration: "Al-Ba'its", meaning: "Yang Maha Membangkitkan" },
+    { number: 50, arabic: "الشَّهِيدُ", transliteration: "Asy-Syahid", meaning: "Yang Maha Menyaksikan" },
+    { number: 51, arabic: "الحَقُّ", transliteration: "Al-Haqq", meaning: "Yang Maha Benar" },
+    { number: 52, arabic: "الوَكِيلُ", transliteration: "Al-Wakil", meaning: "Yang Maha Mewakili/Memelihara" },
+    { number: 53, arabic: "القَوِيُّ", transliteration: "Al-Qawiy", meaning: "Yang Maha Kuat" },
+    { number: 54, arabic: "المَتِينُ", transliteration: "Al-Matin", meaning: "Yang Maha Kokoh" },
+    { number: 55, arabic: "الوَلِيُّ", transliteration: "Al-Waliyy", meaning: "Yang Maha Melindungi" },
+    { number: 56, arabic: "الحَمِيدُ", transliteration: "Al-Hamid", meaning: "Yang Maha Terpuji" },
+    { number: 57, arabic: "المُحْصِي", transliteration: "Al-Muhshi", meaning: "Yang Maha Menghitung" },
+    { number: 58, arabic: "المُبْدِئُ", transliteration: "Al-Mubdi'", meaning: "Yang Maha Memulai" },
+    { number: 59, arabic: "المُعِيدُ", transliteration: "Al-Mu'id", meaning: "Yang Maha Mengembalikan Kehidupan" },
+    { number: 60, arabic: "المُحْيِي", transliteration: "Al-Muhyi", meaning: "Yang Maha Menghidupkan" },
+    { number: 61, arabic: "المُمِيتُ", transliteration: "Al-Mumit", meaning: "Yang Maha Mematikan" },
+    { number: 62, arabic: "الحَيُّ", transliteration: "Al-Hayy", meaning: "Yang Maha Hidup" },
+    { number: 63, arabic: "القَيُّومُ", transliteration: "Al-Qayyum", meaning: "Yang Maha Berdiri Sendiri" },
+    { number: 64, arabic: "الوَاجِدُ", transliteration: "Al-Wajid", meaning: "Yang Maha Menemukan" },
+    { number: 65, arabic: "المَاجِدُ", transliteration: "Al-Majid", meaning: "Yang Maha Mulia" },
+    { number: 66, arabic: "الوَاحِدُ", transliteration: "Al-Wahid", meaning: "Yang Maha Tunggal" },
+    { number: 67, arabic: "الأَحَدُ", transliteration: "Al-Ahad", meaning: "Yang Maha Esa" },
+    { number: 68, arabic: "الصَّمَدُ", transliteration: "Ash-Shamad", meaning: "Yang Maha Dibutuhkan" },
+    { number: 69, arabic: "القَادِرُ", transliteration: "Al-Qadir", meaning: "Yang Maha Kuasa" },
+    { number: 70, arabic: "المُقْتَدِرُ", transliteration: "Al-Muqtadir", meaning: "Yang Maha Berkuasa Penuh" },
+    { number: 71, arabic: "المُقَدِّمُ", transliteration: "Al-Muqaddim", meaning: "Yang Maha Mendahulukan" },
+    { number: 72, arabic: "المُؤَخِّرُ", transliteration: "Al-Mu'akhkhir", meaning: "Yang Maha Mengakhirkan" },
+    { number: 73, arabic: "الأَوَّلُ", transliteration: "Al-Awwal", meaning: "Yang Maha Awal" },
+    { number: 74, arabic: "الآخِرُ", transliteration: "Al-Akhir", meaning: "Yang Maha Akhir" },
+    { number: 75, arabic: "الظَّاهِرُ", transliteration: "Azh-Zhahir", meaning: "Yang Maha Nyata" },
+    { number: 76, arabic: "البَاطِنُ", transliteration: "Al-Bathin", meaning: "Yang Maha Gaib" },
+    { number: 77, arabic: "الوَالِي", transliteration: "Al-Wali", meaning: "Yang Maha Menguasai" },
+    { number: 78, arabic: "المُتَعَالِي", transliteration: "Al-Muta'ali", meaning: "Yang Maha Tinggi" },
+    { number: 79, arabic: "البَرُّ", transliteration: "Al-Barr", meaning: "Yang Maha Melimpahkan Kebaikan" },
+    { number: 80, arabic: "التَّوَّابُ", transliteration: "At-Tawwab", meaning: "Yang Maha Menerima Taubat" },
+    { number: 81, arabic: "المُنْتَقِمُ", transliteration: "Al-Muntaqim", meaning: "Yang Maha Pemberi Balasan" },
+    { number: 82, arabic: "العَفُوُّ", transliteration: "Al-'Afuww", meaning: "Yang Maha Pemaaf" },
+    { number: 83, arabic: "الرَّؤُوفُ", transliteration: "Ar-Ra'uf", meaning: "Yang Maha Mengasihi" },
+    { number: 84, arabic: "مَالِكُ المُلْكِ", transliteration: "Malikul-Mulk", meaning: "Yang Maha Menguasai Kerajaan" },
+    { number: 85, arabic: "ذُو الجَلاَلِ وَالإِكْرَامِ", transliteration: "Dzul Jalali Wal Ikram", meaning: "Yang Memiliki Kebesaran dan Kemuliaan" },
+    { number: 86, arabic: "المُقْسِطُ", transliteration: "Al-Muqsith", meaning: "Yang Maha Adil/Pemberi Keadilan" },
+    { number: 87, arabic: "الجَامِعُ", transliteration: "Al-Jami'", meaning: "Yang Maha Mengumpulkan" },
+    { number: 88, arabic: "الغَنِيُّ", transliteration: "Al-Ghaniyy", meaning: "Yang Maha Kaya Raya" },
+    { number: 89, arabic: "المُغْنِي", transliteration: "Al-Mughni", meaning: "Yang Maha Pemberi Kekayaan" },
+    { number: 90, arabic: "المَانِعُ", transliteration: "Al-Mani'", meaning: "Yang Maha Mencegah" },
+    { number: 91, arabic: "الضَّارُّ", transliteration: "Adh-Dhar", meaning: "Yang Maha Pemberi Bahaya" },
+    { number: 92, arabic: "النَّافِعُ", transliteration: "An-Nafi'", meaning: "Yang Maha Pemberi Manfaat" },
+    { number: 93, arabic: "النُّورُ", transliteration: "An-Nur", meaning: "Yang Maha Bercahaya" },
+    { number: 94, arabic: "الهَادِي", transliteration: "Al-Hadi", meaning: "Yang Maha Pemberi Petunjuk" },
+    { number: 95, arabic: "البَدِيعُ", transliteration: "Al-Badi'", meaning: "Yang Maha Pencipta (yang tiada banding)" },
+    { number: 96, arabic: "البَاقِي", transliteration: "Al-Baqi", meaning: "Yang Maha Kekal" },
+    { number: 97, arabic: "الوَارِثُ", transliteration: "Al-Warits", meaning: "Yang Maha Pewaris" },
+    { number: 98, arabic: "الرَّشِيدُ", transliteration: "Ar-Rasyid", meaning: "Yang Maha Pandai" },
+    { number: 99, arabic: "الصَّبُورُ", transliteration: "Ash-Shabur", meaning: "Yang Maha Sabar" }
+];
+    </script>
+ 
+    <script>  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('asmaul-husna-container');
+
+    asmaulHusna.forEach(item => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        
+        card.innerHTML = `
+            <div class="card-number">${item.number}</div>
+            <div class="card-arabic">${item.arabic}</div>
+            <div class="card-transliteration">${item.transliteration}</div>
+            <div class="card-meaning">${item.meaning}</div>
+        `;
+        
+        container.appendChild(card);
+    });
+});
+
+    </script>
+</body>
+</html>
