@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Password Generator</title>
+  <style>
+    /* Reset & Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      color: white;
+      margin-bottom: 30px;
+    }
+    header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 5px;
+      font-weight: 700;
+    }
+    header p {
+      font-size: 1.2rem;
+      color: #d1d1d1;
+    }
+    main {
+      background: white;
+      border-radius: 12px;
+      padding: 30px 25px;
+      max-width: 450px;
+      width: 100%;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-weight: 700;
+      color: #333;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #555;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 10px 15px;
+      font-size: 16px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      transition: border-color 0.3s ease;
+    }
+    input[type="number"]:focus {
+      border-color: #667eea;
+      outline: none;
+    }
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .checkbox-group label {
+      font-weight: 500;
+      color: #444;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      user-select: none;
+    }
+    .checkbox-group input[type="checkbox"] {
+      margin-right: 8px;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+    button {
+      background-color: #667eea;
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 10px;
+      width: 100%;
+      font-weight: 700;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+      box-shadow: 0 4px 10px rgba(102,126,234,0.6);
+    }
+    button:hover {
+      background-color: #5a6edc;
+    }
+    #output {
+      margin-top: 25px;
+      font-size: 20px;
+      word-break: break-word;
+      padding: 15px;
+      background-color: #f0f4ff;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: 600;
+      user-select: all;
+      box-shadow: inset 0 0 8px rgba(102,126,234,0.3);
+      min-height: 48px;
+    }
+    /* Password strength meter */
+    .strength-meter {
+      height: 12px;
+      border-radius: 10px;
+      background: #eee;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+    .strength-bar {
+      height: 100%;
+      width: 0%;
+      transition: width 0.4s ease;
+      border-radius: 10px;
+    }
+    .strength-text {
+      margin-top: 6px;
+      font-weight: 600;
+      font-size: 14px;
+      text-align: center;
+      color: #444;
+      min-height: 18px;
+    }
+    footer {
+      margin-top: 40px;
+      color: white;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      main {
+        padding: 25px 20px;
+      }
+      header h1 {
+        font-size: 2.2rem;
+      }
+      button {
+        font-size: 16px;
+        padding: 12px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>Password Generator</h1>
+    <p>Buat password kuat dengan kombinasi pilihan kamu sendiri!</p>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <h2>Generate Password</h2>
+    <div class="form-group">
+      <label for="length">Panjang Password:</label>
+      <input type="number" id="length" value="12" min="4" max="128" />
+    </div>
+
+    <div class="form-group checkbox-group">
+      <label><input type="checkbox" id="lowercase" checked /> Huruf Kecil (a-z)</label>
+      <label><input type="checkbox" id="uppercase" checked /> Huruf Besar (A-Z)</label>
+      <label><input type="checkbox" id="numbers" checked /> Angka (0-9)</label>
+      <label><input type="checkbox" id="symbols" /> Simbol (!@#$%^&*)</label>
+    </div>
+
+    <button onclick="generatePassword()">Generate Password</button>
+
+    <div id="output"></div>
+
+    <!-- Password Strength Meter -->
+    <div class="strength-meter" aria-label="Password strength meter">
+      <div class="strength-bar" id="strength-bar"></div>
+    </div>
+    <div class="strength-text" id="strength-text"></div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    &copy; 2025 Password Generator | Dibuat dengan ❤️
+  </footer>
+
+  <script>
+    function generatePassword() {
+      const length = parseInt(document.getElementById('length').value);
+      const lowercase = document.getElementById('lowercase').checked;
+      const uppercase = document.getElementById('uppercase').checked;
+      const numbers = document.getElementById('numbers').checked;
+      const symbols = document.getElementById('symbols').checked;
+
+      const lowerChars = "abcdefghijklmnopqrstuvwxyz";
+      const upperChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      const numberChars = "0123456789";
+      const symbolChars = "!@#$%^&*";
+
+      let allChars = "";
+      if (lowercase) allChars += lowerChars;
+      if (uppercase) allChars += upperChars;
+      if (numbers) allChars += numberChars;
+      if (symbols) allChars += symbolChars;
+
+      if (allChars === "") {
+        document.getElementById("output").textContent = "Pilih setidaknya satu jenis karakter!";
+        updateStrengthMeter("");
+        return;
+      }
+
+      let password = "";
+      for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * allChars.length);
+        password += allChars[randomIndex];
+      }
+
+      document.getElementById("output").textContent = password;
+      updateStrengthMeter(password);
+    }
+
+    // Simple password strength checker function
+    function getPasswordStrength(password) {
+      let score = 0;
+      if (!password) return score;
+
+      // Length points
+      if (password.length >= 8) score += 1;
+      if (password.length >= 12) score += 1;
+
+      // Character variety points
+      if (/[a-z]/.test(password)) score += 1;
+      if (/[A-Z]/.test(password)) score += 1;
+      if (/[0-9]/.test(password)) score += 1;
+      if (/[\!\@\#\$\%\^\&\*]/.test(password)) score += 1;
+
+      return score; // Max 6
+    }
+
+    function updateStrengthMeter(password) {
+      const strengthBar = document.getElementById('strength-bar');
+      const strengthText = document.getElementById('strength-text');
+
+      const strength = getPasswordStrength(password);
+
+      const strengthPercent = (strength / 6) * 100;
+      strengthBar.style.width = strengthPercent + '%';
+
+      let color = '#eee';
+      let text = '';
+      switch(strength) {
+        case 0:
+        case 1:
+          color = '#e74c3c'; // red
+          text = 'Sangat Lemah';
+          break;
+        case 2:
+          color = '#e67e22'; // orange
+          text = 'Lemah';
+          break;
+        case 3:
+        case 4:
+          color = '#f1c40f'; // yellow
+          text = 'Sedang';
+          break;
+        case 5:
+          color = '#2ecc71'; // light green
+          text = 'Kuat';
+          break;
+        case 6:
+          color = '#27ae60'; // green
+          text = 'Sangat Kuat';
+          break;
+      }
+      strengthBar.style.backgroundColor = color;
+      strengthText.textContent = text;
+      strengthText.style.color = color;
+    }
+  </script>
+
+</body>
+</html>
