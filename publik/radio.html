@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Daring - Streaming Modern</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* RESET DAN FONT */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fa; /* Warna latar belakang lembut */
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, #007bff, #0056b3); /* Gradien biru */
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h1 {
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+        
+        /* CONTAINER UTAMA */
+        .container {
+            max-width: 900px;
+            width: 90%;
+            margin: 30px auto;
+            padding: 20px;
+            flex-grow: 1;
+        }
+        
+        /* PLAYER CARD */
+        .radio-player-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            border-left: 5px solid #007bff; /* Garis aksen */
+        }
+        
+        .radio-player-card h2 {
+            color: #007bff;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .radio-player-card .tagline {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+        }
+        
+        /* KONTROL */
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .control-btn {
+            background-color: #28a745; /* Warna hijau untuk Play */
+            color: white;
+            border: none;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s, box-shadow 0.3s;
+            box-shadow: 0 4px 10px rgba(40, 167, 69, 0.4);
+        }
+        
+        .control-btn:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(40, 167, 69, 0.5);
+        }
+        
+        .control-btn:active {
+            transform: scale(0.95);
+            box-shadow: none;
+        }
+        
+        /* Tombol Stop/Pause saat aktif */
+        .control-btn.playing {
+            background-color: #dc3545; /* Warna merah untuk Stop */
+            box-shadow: 0 4px 10px rgba(220, 53, 69, 0.4);
+        }
+        
+        .control-btn.playing:hover {
+            background-color: #c82333;
+            box-shadow: 0 6px 15px rgba(220, 53, 69, 0.5);
+        }
+        
+        .status-indicator {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #6c757d;
+            min-width: 120px; /* Menjaga tata letak saat teks berubah */
+        }
+        
+        .status-indicator.is-playing {
+            color: #28a745;
+        }
+        
+        .status-indicator.is-loading {
+            color: #ffc107;
+        }
+        
+        /* TAUTAN LANGSUNG */
+        .direct-link {
+            display: inline-block;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            padding: 5px 10px;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .direct-link:hover {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        /* SEPARATOR */
+        .separator {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 123, 255, 0.5), rgba(0, 0, 0, 0));
+            margin: 40px 0;
+        }
+        
+        /* DAFTAR LINK LAIN */
+        .link-section h3 {
+            text-align: center;
+            color: #343a40;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .link-list {
+            list-style: none;
+        }
+        
+        .link-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+        
+        .link-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .radio-name {
+            font-weight: 400;
+            color: #555;
+        }
+        
+        .stream-link {
+            color: #17a2b8; /* Warna biru muda untuk link */
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .stream-link:hover {
+            color: #0e6c78;
+        }
+        
+        /* LINK KEMBALI KE PORTAL */
+        .portal-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            color: #6c757d;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        
+        .portal-link:hover {
+            color: #333;
+        }
+        
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 15px 0;
+            background-color: #343a40;
+            color: #adb5bd;
+            font-size: 0.85rem;
+            margin-top: 30px;
+        }
+        
+        /* RESPONSIVENESS */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        
+            .container {
+                width: 95%;
+                margin: 20px auto;
+            }
+        
+            .radio-player-card {
+                padding: 20px;
+            }
+        
+            .radio-player-card h2 {
+                font-size: 1.5rem;
+            }
+        
+            .control-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+        
+            .link-item {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 10px 15px;
+            }
+        
+            .radio-name {
+                margin-bottom: 5px;
+            }
+        }
+        </style>        
+</head>
+<body>
+    <header class="header">
+        <h1>📻 Radio Daring Indonesia</h1>
+    </header>
+
+    <main class="container">
+        <section class="radio-player-card current-station">
+            <h2>Radio Republik Indonesia Mataram</h2>
+            <p class="tagline">RRI Pro 1 Mataram</p>
+
+            <audio id="radioEdukasi" src="https://stream-node1.rri.co.id/streaming/13/9113/rrimatarampro1.mp3" preload="none"></audio>
+
+            <div class="controls">
+                <button id="playPauseBtn" class="control-btn" data-target="radioEdukasi">
+                    <i class="fas fa-play"></i>
+                </button>
+                <span id="statusText" class="status-indicator">Tekan Putar</span>
+            </div>
+            <a href="https://stream-node1.rri.co.id/streaming/13/9113/rrimatarampro1.mp3" target="_blank" class="direct-link">
+                Tautan Langsung Streaming
+            </a>
+        </section>
+
+        <hr class="separator">
+
+        <section class="link-section">
+            <h3>Pilihan Live Streaming Lain</h3>
+            <ul class="link-list">
+                <li class="link-item">
+                    <span class="radio-name">Live Streaming RRI</span>
+                    <a href="https://www.rri.co.id/stream/radio" target="_blank" class="stream-link">
+                        Dengarkan <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </li>
+                <li class="link-item">
+                    <span class="radio-name">Live Streaming RRI Pro 2 Mataram</span>
+                    <a href="https://stream-node1.rri.co.id/streaming/13/9113/rrimatarampro2.mp3" target="_blank" class="stream-link">
+                        Dengarkan <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </li>
+                <li class="link-item">
+                    <span class="radio-name">Live Streaming RRI Pro 4 Mataram</span>
+                    <a href="https://stream-node1.rri.co.id/streaming/13/9113/rrimatarampro4.mp3" target="_blank" class="stream-link">
+                        Dengarkan <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </li>
+                <li class="link-item">
+                    <span class="radio-name">Live Streaming Radio Edukasi (Arsip)</span>
+                    <a href="https://radioedukasi.kemdikbud.go.id:9443/stream.mp3" target="_blank" class="stream-link">
+                        Dengarkan <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </li>
+            </ul>
+        </section>
+        
+        <a href="https://portal-faridjamil.blogspot.com/2025/01/radio-daring.html" class="portal-link">
+            &larr; Kembali ke Portal
+        </a>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Radio Daring - Farid Jamil Portal</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<script>document.addEventListener('DOMContentLoaded', () => {
+    const radio = document.getElementById('radioEdukasi');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const statusText = document.getElementById('statusText');
+    const icon = playPauseBtn.querySelector('i');
+
+    let isPlaying = false;
+
+    // Fungsi untuk mengubah status
+    function setStatus(text, className = '') {
+        statusText.textContent = text;
+        statusText.className = 'status-indicator ' + className;
+    }
+
+    // Event listener untuk tombol Play/Pause
+    playPauseBtn.addEventListener('click', () => {
+        if (isPlaying) {
+            // JIKA sedang dimainkan, HENTIKAN
+            radio.pause();
+            isPlaying = false;
+            icon.className = 'fas fa-play'; // Ganti icon ke Play
+            playPauseBtn.classList.remove('playing');
+            setStatus('Berhenti', '');
+        } else {
+            // JIKA sedang berhenti, PUTAR
+            setStatus('Memuat...', 'is-loading'); // Tampilkan status memuat
+            
+            const playPromise = radio.play();
+
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    // Play berhasil
+                    isPlaying = true;
+                    icon.className = 'fas fa-pause'; // Ganti icon ke Pause
+                    playPauseBtn.classList.add('playing');
+                    setStatus('Memutar', 'is-playing');
+                }).catch(error => {
+                    // Play gagal (misalnya, browser memblokir auto-play)
+                    console.error("Gagal memutar radio:", error);
+                    setStatus('Gagal Putar', '');
+                    alert("Gagal memutar radio. Pastikan Anda sudah berinteraksi dengan halaman ini (klik tombol) atau periksa koneksi internet Anda.");
+                    isPlaying = false;
+                    icon.className = 'fas fa-play'; 
+                    playPauseBtn.classList.remove('playing');
+                });
+            }
+        }
+    });
+
+    // Event listener bawaan audio untuk feedback status yang lebih akurat
+    radio.addEventListener('waiting', () => {
+        if (isPlaying) {
+             setStatus('Buffering...', 'is-loading');
+        }
+    });
+
+    radio.addEventListener('playing', () => {
+        if (isPlaying) {
+             setStatus('Memutar', 'is-playing');
+        }
+    });
+
+    radio.addEventListener('error', () => {
+        setStatus('Kesalahan', '');
+        console.error("Kesalahan streaming radio.");
+        alert("Terjadi kesalahan saat mencoba memutar streaming radio.");
+        isPlaying = false;
+        icon.className = 'fas fa-play'; 
+        playPauseBtn.classList.remove('playing');
+    });
+
+    radio.addEventListener('pause', () => {
+        if (!isPlaying) {
+            setStatus('Berhenti', '');
+        }
+    });
+
+    // Mencegah pemutaran otomatis saat halaman dimuat
+    radio.pause();
+    radio.currentTime = 0; // Atur ulang waktu jika perlu
+
+});</script>
+</body>
+</html>
