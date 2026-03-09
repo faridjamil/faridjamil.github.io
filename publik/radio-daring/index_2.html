@@ -1,99 +1,273 @@
-<html>
+<!DOCTYPE html>
+<html lang="id">
 <head>
-  <title>Farid Jamil Radio</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to right, #e0f7fa, #ffffff);
-      color: #333;
-      margin: 0;
-      padding: 0;
-      margin-top: 30px;
-      margin-bottom: 30px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Radio Daring - Premium Player</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+:root {
+    --primary-blue: #0066ff;
+    --dark-blue: #001d4a;
+    --glass-blue: rgba(0, 102, 255, 0.1);
+    --bg-color: #f0f4f9;
+    --text-main: #1e293b;
+}
 
-    center {
-      display: block;
-      max-width: 700px;
-      margin: auto;
-      padding: 20px 20px;
-      background-color: #ffffff;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      border-radius: 12px;
-    }
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-    h1 {
-      font-size: 2.5em;
-      color: #00796b;
-      margin-bottom: 10px;
-    }
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    overflow-x: hidden;
+}
 
-    h2, h3 {
-      color: #004d40;
-      margin-top: 20px;
-      margin-bottom: 10px;
-    }
+/* App Bar */
+.app-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px; background: white; position: sticky; top: 0; z-index: 100;
+}
+.app-title { font-weight: 700; font-size: 1.1rem; color: var(--dark-blue); }
+.menu-icon, .user-avatar { font-size: 1.2rem; color: var(--primary-blue); cursor: pointer; }
 
-    p {
-      font-size: 1em;
-      line-height: 1.6;
-      margin: 10px 0;
-    }
+/* Player Section */
+.player-container {
+    padding: 30px 20px; text-align: center;
+    background: linear-gradient(180deg, #ffffff 0%, #eef5ff 100%);
+    border-radius: 0 0 40px 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
 
-    a {
-      color: #0288d1;
-      text-decoration: none;
-      font-weight: bold;
-    }
+.vinyl-wrapper {
+    position: relative; width: 220px; height: 220px; margin: 0 auto 30px;
+}
 
-    a:hover {
-      text-decoration: underline;
-    }
+.vinyl-disc {
+    width: 100%; height: 100%; border-radius: 50%;
+    padding: 10px; background: #fff;
+    box-shadow: 0 15px 35px rgba(0,102,255,0.2);
+    overflow: hidden; transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
-    iframe {
-      width: 100%;
-      height: 60px;
-      border: none;
-      background-color: #f1f1f1;
-      margin-bottom: 20px;
-      border-radius: 8px;
-    }
+.vinyl-disc img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 
-    br {
-      display: none;
-    }
-  </style>
+.vinyl-disc.rotating {
+    animation: rotate 10s linear infinite;
+}
+
+/* Now Playing Info */
+.now-playing h2 { font-size: 1.4rem; color: var(--dark-blue); margin-bottom: 5px; }
+.now-playing p { color: #64748b; font-size: 0.9rem; margin-bottom: 15px; }
+
+.live-indicator {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #dcfce7; color: #15803d;
+    padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;
+}
+.dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; animation: pulse 1.5s infinite; }
+
+/* Controls */
+.master-controls { margin-top: 30px; }
+
+.volume-box {
+    display: flex; align-items: center; gap: 15px; margin-bottom: 25px;
+    background: white; padding: 10px 20px; border-radius: 15px;
+}
+input[type=range] { flex: 1; accent-color: var(--primary-blue); }
+
+.action-buttons { display: flex; justify-content: center; align-items: center; gap: 30px; }
+
+.main-play-btn {
+    width: 75px; height: 75px; border-radius: 50%; border: none;
+    background: var(--primary-blue); color: white; font-size: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0, 102, 255, 0.4); cursor: pointer;
+    transition: 0.3s;
+}
+.main-play-btn:active { transform: scale(0.9); }
+
+.sub-btn {
+    background: none; border: 1px solid #e2e8f0; width: 45px; height: 45px;
+    border-radius: 50%; color: #64748b; font-size: 1.1rem;
+}
+
+.status-msg { margin-top: 15px; font-size: 0.85rem; color: #94a3b8; font-weight: 500; }
+
+/* Station Grid */
+.station-discovery { padding: 30px 20px 100px; }
+.sec-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.sec-header h3 { font-size: 1.1rem; color: var(--dark-blue); }
+.sec-header a { font-size: 0.85rem; text-decoration: none; color: var(--primary-blue); font-weight: 600; }
+
+.station-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+.station-card {
+    background: white; padding: 15px; border-radius: 20px;
+    text-align: center; border: 2px solid transparent; transition: 0.3s;
+}
+.station-card.active { border-color: var(--primary-blue); background: #f0f7ff; }
+.station-card i { font-size: 1.5rem; color: var(--primary-blue); margin-bottom: 10px; }
+.station-card span { display: block; font-size: 0.85rem; font-weight: 600; }
+
+/* Bottom Nav */
+.bottom-nav {
+    position: fixed; bottom: 0; width: 100%; background: white;
+    display: flex; justify-content: space-around; padding: 15px 0 30px;
+    border-radius: 25px 25px 0 0; box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
+}
+.nav-item { display: flex; flex-direction: column; align-items: center; color: #94a3b8; font-size: 0.7rem; gap: 5px; }
+.nav-item.active { color: var(--primary-blue); }
+
+@keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+    </style>
 </head>
 <body>
-  <center>
-    <h1>Farid Jamil Radio</h1>
-    <br>
-    <h2>Live Streaming</h2>
-    <h2>Radio Republik Indonesia Mataram</h2>
-    <br>
-    <iframe src="https://stream-node1.rri.co.id/streaming/13/9113/rrimatarampro1.mp3"></iframe>
-    <br>
-    <p>Live Streaming RRI Pro 1 Mataram  :   <a href="https://stream-node1.rri.co.id/streaming/13/9113/rrimatarampro1.mp3">Live Streaming</a></p>
-    <p>Link Situs RRI Pro 1 Mataram  :   <a href="https://rri.co.id/stream/radio">Link Situs</a></p>
-    <br>
-    <h3>RRI Pro 1 Mataram</h3>
-    <br>
-    <p>Live Streaming RRI Pro 2 Mataram  :   <a href="https://stream-node1.rri.co.id/streaming/13/9113/rrimatarampro2.mp3">Live Streaming</a></p>
-    <p>Link Situs RRI Pro 2 Mataram  :   <a href="https://rri.co.id/stream/radio">Link Situs</a></p>
-    <br>
-    <h3>RRI Pro 2 Mataram</h3>
-    <br>
-    <p>Live Streaming RRI Pro 4 Mataram  :   <a href="https://stream-node1.rri.co.id/streaming/13/9113/rrimatarampro4.mp3">Live Streaming</a></p>
-    <p>Link Situs RRI Pro 4 Mataram  :   <a href="https://rri.co.id/stream/radio">Link Situs</a></p>
-    <br>
-    <h3>RRI Pro 4 Mataram</h3>
-    <br>
-    <p>Live Streaming Radio Edukasi   :   <a href="https://radioedukasi.kemdikbud.go.id:9443/stream.mp3">Live Streaming</a></p>
-    <p>Arsip Link Situs Radio Edukasi   :   <a href="https://radioedukasi.kemdikbud.go.id/">Arsip Link Situs</a></p>
-    <br>
-    <h3>Radio Edukasi</h3>
-    <h3>Balai Besar Guru Penggerak Provinsi D.I. Yogyakarta</h3>
-    <br>
-  </center>
+
+    <header class="app-bar">
+        <div class="menu-icon"><i class="fa-solid fa-bars-staggered"></i></div>
+        <div class="app-title">Radio Daring</div>
+        <div class="user-avatar"><i class="fa-solid fa-circle-user"></i></div>
+    </header>
+
+    <main class="app-content">
+        <section class="player-container">
+            <div class="vinyl-wrapper">
+                <div class="vinyl-disc" id="disc">
+                    <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&q=80&w=500" alt="Cover Art">
+                </div>
+                <div class="pulse-ring"></div>
+            </div>
+
+            <div class="now-playing">
+                <h2 id="station-name">RRI Pro 1 Mataram</h2>
+                <p id="station-tagline">Suara Kreativitas</p>
+                <div class="live-indicator"><span class="dot"></span> LIVE</div>
+            </div>
+
+            <audio id="mainRadio" src="https://stream-node1.rri.co.id/streaming/13/9113/rrimatarampro1.mp3" preload="none"></audio>
+
+            <div class="master-controls">
+                <div class="volume-box">
+                    <i class="fa-solid fa-volume-low"></i>
+                    <input type="range" id="volumeSlider" min="0" max="100" value="80">
+                    <i class="fa-solid fa-volume-high"></i>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="sub-btn"><i class="fa-solid fa-heart"></i></button>
+                    <button id="playPauseBtn" class="main-play-btn">
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+                    <button class="sub-btn"><i class="fa-solid fa-share-nodes"></i></button>
+                </div>
+                
+                <p id="statusInfo" class="status-msg">Tekan putar untuk mendengar</p>
+            </div>
+        </section>
+
+        <section class="station-discovery">
+            <div class="sec-header">
+                <h3>Stasiun Populer</h3>
+                <a href="#">Lainnya</a>
+            </div>
+            
+            <div class="station-grid" id="stationGrid">
+                </div>
+        </section>
+    </main>
+
+    <nav class="bottom-nav">
+        <div class="nav-item active">
+            <i class="fa-solid fa-house-chimney"></i>
+            <span>Home</span>
+        </div>
+        <div class="nav-item">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>Cari</span>
+        </div>
+        <div class="nav-item">
+            <i class="fa-solid fa-tower-broadcast"></i>
+            <span>Radio</span>
+        </div>
+        <div class="nav-item">
+            <i class="fa-solid fa-bookmark"></i>
+            <span>Koleksi</span>
+        </div>
+    </nav>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const radio = document.getElementById('mainRadio');
+    const playBtn = document.getElementById('playPauseBtn');
+    const statusText = document.getElementById('statusInfo');
+    const disc = document.getElementById('disc');
+    const volSlider = document.getElementById('volumeSlider');
+
+    const stations = [
+        { name: "Pro 1 Mataram", id: "rrimatarampro1", url: "https://stream-node1.rri.co.id/streaming/13/9113/rrimatarampro1.mp3", tagline: "Pusat Pemberdayaan Masyarakat" },
+        { name: "Pro 2 Mataram", id: "rrimatarampro2", url: "https://stream-node1.rri.co.id/streaming/13/9113/rrimatarampro2.mp3", tagline: "Pusat Kreativitas Anak Muda" },
+        { name: "Pro 4 Mataram", id: "rrimatarampro4", url: "https://stream-node1.rri.co.id/streaming/13/9113/rrimatarampro4.mp3", tagline: "Pusat Budaya Indonesia" },
+        { name: "Radio Edukasi", id: "edukasi", url: "https://radioedukasi.kemdikbud.go.id:9443/stream.mp3", tagline: "Cerdas Bermartabat" }
+    ];
+
+    let isPlaying = false;
+
+    // Render Stations Grid
+    const grid = document.getElementById('stationGrid');
+    stations.forEach((st, idx) => {
+        const card = document.createElement('div');
+        card.className = `station-card ${idx === 0 ? 'active' : ''}`;
+        card.innerHTML = `
+            <i class="fa-solid fa-tower-broadcast"></i>
+            <span>${st.name}</span>
+        `;
+        card.onclick = () => switchStation(st, card);
+        grid.appendChild(card);
+    });
+
+    function switchStation(st, element) {
+        radio.src = st.url;
+        document.getElementById('station-name').textContent = st.name;
+        document.getElementById('station-tagline').textContent = st.tagline;
+        
+        document.querySelectorAll('.station-card').forEach(c => c.classList.remove('active'));
+        element.classList.add('active');
+        
+        if (isPlaying) radio.play();
+    }
+
+    playBtn.onclick = () => {
+        if (!isPlaying) {
+            statusText.textContent = "Menghubungkan...";
+            radio.play().then(() => {
+                isPlaying = true;
+                updateUI(true);
+            }).catch(() => {
+                statusText.textContent = "Gagal memutar.";
+            });
+        } else {
+            radio.pause();
+            isPlaying = false;
+            updateUI(false);
+        }
+    };
+
+    function updateUI(playing) {
+        const icon = playBtn.querySelector('i');
+        icon.className = playing ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+        playing ? disc.classList.add('rotating') : disc.classList.remove('rotating');
+        statusText.textContent = playing ? "Sedang Mengudara" : "Radio Terhenti";
+    }
+
+    volSlider.oninput = (e) => {
+        radio.volume = e.target.value / 100;
+    };
+
+    // Buffer handling
+    radio.onwaiting = () => statusText.textContent = "Buffering...";
+    radio.onplaying = () => statusText.textContent = "Sedang Mengudara";
+});
+    </script>
 </body>
 </html>
