@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal GeoMedia - Farid Jamil</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #f8694d;
+            --primary-dark: #d5563d;
+            --accent-color: #2d3436;
+            --bg-body: #f4f7f6;
+            --text-main: #2d3436;
+            --text-muted: #636e72;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.05);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+
+        body { 
+            background: var(--bg-body); 
+            color: var(--text-main); 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 25px; 
+        }
+
+        /* --- Header & Nav --- */
+        header {
+            background: var(--white);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            color: var(--primary-color);
+        }
+
+        .logo p {
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-top: -5px;
+        }
+
+        nav#main-nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav#main-nav ul li a {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--accent-color);
+            position: relative;
+        }
+
+        nav#main-nav ul li a:hover { color: var(--primary-color); }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* --- Layout --- */
+        .hero-spacer { height: 100px; }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        /* --- Content Style --- */
+        .post-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0,0,0,0.02);
+            transition: var(--transition);
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        .post-card h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+
+        .post-card h2 a:hover { color: var(--primary-color); }
+
+        .post-body {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 20px;
+            font-weight: 800;
+            color: var(--primary-color);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- Sidebar --- */
+        .sidebar-widget {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .sidebar-widget h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 15px;
+        }
+
+        .category-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .category-list li:last-child { border-bottom: none; }
+
+        .category-list li a:hover {
+            padding-left: 10px;
+            color: var(--primary-color);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--accent-color);
+            color: var(--white);
+            padding: 80px 0 40px;
+            margin-top: 80px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo h2 { font-family: 'Oswald'; color: var(--primary-color); }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 30px;
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 992px) {
+            .main-grid { grid-template-columns: 1fr; }
+            .sidebar-wrapper { order: 2; }
+            .main-content { order: 1; }
+        }
+
+        @media (max-width: 768px) {
+            nav#main-nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: var(--white);
+                padding: 100px 40px;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+                transition: 0.5s ease-in-out;
+            }
+
+            nav#main-nav.active { right: 0; }
+
+            nav#main-nav ul {
+                flex-direction: column;
+                gap: 25px;
+            }
+
+            .menu-toggle { display: block; color: var(--primary-color); }
+            
+            .post-card { padding: 30px 20px; }
+            
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div class="container header-content">
+            <div class="logo">
+                <a href="#">
+                    <h1>PORTAL GEOMEDIA</h1>
+                    <p>Edukasi & Media Spasial</p>
+                </a>
+            </div>
+
+            <nav id="main-nav">
+                <ul id="main-menu">
+                    <li><a href="#home">Beranda</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#education">Edukasi</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+            </nav>
+
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="hero-spacer"></div>
+
+    <main class="container">
+        <div class="main-grid">
+            
+            <section class="main-content">
+                <article class="post-card">
+                    <div class="post-content">
+                        <h2><a href="#">Selamat Datang di Proyek GeoMedia</a></h2>
+                        <div class="post-body">
+                            <p>Transformasi digital dalam pendidikan geografi dimulai di sini. Kami menggabungkan kekuatan visual media dengan data spasial yang akurat untuk menciptakan pengalaman belajar yang tak terlupakan.</p>
+                        </div>
+                        <a href="#" class="read-more">Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="post-content">
+                        <h2><a href="#">Inovasi Media Pembelajaran</a></h2>
+                        <div class="post-body">
+                            <p>Visualisasi data bukan lagi sekadar angka. Dengan Web GIS dan interaktivitas, siswa dapat menjelajahi fenomena geosfer secara langsung dari layar mereka.</p>
+                        </div>
+                        <a href="#" class="read-more">Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </section>
+
+            <aside class="sidebar-wrapper">
+                <div class="sidebar-widget">
+                    <h3>Profil Pengembang</h3>
+                    <p style="font-size: 14px; color: var(--text-muted);">
+                        <strong>Farid Jamil</strong><br>
+                        Fokus pada pengembangan media pembelajaran digital yang interaktif untuk memajukan pendidikan geografi di Indonesia.
+                    </p>
+                </div>
+
+                <div class="sidebar-widget">
+                    <h3>Eksplorasi Materi</h3>
+                    <ul class="category-list">
+                        <li><a href="#"><i class="fas fa-map-marked-alt"></i> &nbsp;Kartografi Digital</a></li>
+                        <li><a href="#"><i class="fas fa-cloud-sun"></i> &nbsp;Meteorologi & Klimatologi</a></li>
+                        <li><a href="#"><i class="fas fa-layer-group"></i> &nbsp;Sistem Informasi Geografis</a></li>
+                        <li><a href="#"><i class="fas fa-globe-asia"></i> &nbsp;Geografi Lingkungan</a></li>
+                    </ul>
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-logo">
+                    <h2>GeoMedia Pro</h2>
+                    <p>Membawa dunia ke dalam ruang kelas melalui inovasi media pembelajaran yang cerdas dan modern.</p>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 20px; font-family: Oswald;">Navigasi</h4>
+                    <ul style="font-size: 14px; opacity: 0.8; line-height: 2;">
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Layanan</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 20px; font-family: Oswald;">Ikuti Kami</h4>
+                    <div style="display: flex; gap: 15px; font-size: 1.2rem;">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 <strong>GeoMedia</strong>. Dikembangkan dengan dedikasi oleh Farid Jamil.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // 1. Sticky Header Effect
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 50) {
+                    $('#header').addClass('scrolled');
+                } else {
+                    $('#header').removeClass('scrolled');
+                }
+            });
+
+            // 2. Mobile Menu Toggle
+            $('.menu-toggle').click(function() {
+                $('#main-nav').toggleClass('active');
+                $(this).find('i').toggleClass('fa-bars fa-times');
+            });
+
+            // 3. Smooth Scroll
+            $('nav a').on('click', function(e) {
+                if (this.hash !== "") {
+                    e.preventDefault();
+                    var hash = this.hash;
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top - 100
+                    }, 800);
+                    
+                    // Close mobile menu after click
+                    if($('#main-nav').hasClass('active')) {
+                        $('.menu-toggle').click();
+                    }
+                }
+            });
+
+            // 4. Subtle Entrance Animation for Cards
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            $('.post-card').css({
+                'opacity': '0',
+                'transform': 'translateY(20px)',
+                'transition': 'all 0.6s ease-out'
+            }).each(function() {
+                observer.observe(this);
+            });
+        });
+    </script>
+</body>
+</html>
