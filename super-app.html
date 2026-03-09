@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farid Jamil - Personal Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+    --blue-dark: #003d80;
+    --blue-medium: #007bff;
+    --blue-geo: #009688;
+    --blue-light: #4a90e2;
+    --gray-blue: #546e7a;
+    --bg-color: #f0f4f8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: #333;
+    display: flex;
+    justify-content: center;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 100%;
+    background: #fff;
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 80px;
+}
+
+header {
+    background: linear-gradient(135deg, var(--blue-dark), var(--blue-medium));
+    color: white;
+    padding: 30px 20px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.avatar img {
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,0.5);
+}
+
+.user-info h1 { font-size: 1.2rem; }
+.user-info p { font-size: 0.75rem; opacity: 0.8; }
+
+.digital-widget { text-align: right; }
+#clock { font-size: 1.2rem; font-weight: bold; }
+#date { font-size: 0.7rem; }
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 20px;
+    margin-top: -20px;
+}
+
+.menu-item {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    text-align: center;
+}
+
+.menu-item:active { transform: scale(0.95); }
+
+.menu-item i {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.menu-item span {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Color Categories */
+.blue-dark i { color: var(--blue-dark); }
+.blue-medium i { color: var(--blue-medium); }
+.blue-geo i { color: var(--blue-geo); }
+.blue-light i { color: var(--blue-light); }
+.gray-blue i { color: var(--gray-blue); }
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 0;
+    border-top: 1px solid #eee;
+}
+
+.bottom-nav a { color: #ccc; font-size: 1.2rem; }
+.bottom-nav a.active { color: var(--blue-medium); }
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Custom Scrollbar untuk Modal Body */
+#modal-body::-webkit-scrollbar {
+    width: 5px;
+}
+#modal-body::-webkit-scrollbar-thumb {
+    background: #eee;
+    border-radius: 10px;
+}
+</style>
+<link rel="me" href="https://www.blogger.com/profile/05620338097998060034" />
+<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
+<meta name='google-adsense-platform-domain' content='blogspot.com'/>
+</head>
+<body>
+
+    <div class="app-container">
+        <header>
+            <div class="profile-section">
+                <div class="avatar">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjoYk9uQDU7VYbCmKv7pywzhOXW4NeglNMTV9u3wfrOtMxSZ3x6zicw-HkdVYeuy7e6nDkh4pt1Yo7-SnZ5sKFG2VQBaKj5bgmhYNhR91m59hcxNiwdeILE-H7dSgPqhilTlRlRx_bg7WUKJw8jr37m8Elct8C_Okld3wvhx9icSjo3FVfWKQlH9as8-glE/s16000/-5172610551631252234_121.jpg" width='70' alt="Farid Jamil Character">
+              </div>
+                <div class="user-info">
+                    <h1>Farid Jamil</h1>
+                    <p>Calon Ahli Media Pembelajaran Geografi</p>
+                </div>
+            </div>
+            <div class="digital-widget">
+                <div id="clock">00:00:00</div>
+                <div id="date">Selasa, 24 Februari 2026</div>
+            </div>
+        </header>
+
+        <main class="menu-grid">
+            <div class="menu-item blue-dark" onclick="openFeature('Profil')">
+                <i class="fas fa-user-circle"></i>
+                <span>Profil</span>
+            </div>
+            <div class="menu-item blue-dark" onclick="openFeature('Portofolio')">
+                <i class="fas fa-file-alt"></i>
+                <span>CV/Portofolio</span>
+            </div>
+            <div class="menu-item blue-dark">
+                <i class="fas fa-address-card"></i>
+                <span>Kartu Nama</span>
+            </div>
+            <div class="menu-item blue-dark">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Jenjang Pendidikan</span>
+            </div>
+
+            <div class="menu-item blue-medium">
+                <i class="fas fa-pen-fancy"></i>
+                <span>Tulisan (KSM)</span>
+            </div>
+            <div class="menu-item blue-medium">
+                <i class="fas fa-paint-brush"></i>
+                <span>Foto Desain</span>
+            </div>
+            <div class="menu-item blue-medium">
+                <i class="fas fa-users"></i>
+                <span>Foto Keluarga</span>
+            </div>
+            <div class="menu-item blue-medium">
+                <i class="fas fa-video"></i>
+                <span>Video</span>
+            </div>
+
+            <div class="menu-item blue-geo">
+                <i class="fas fa-cloud-sun"></i>
+                <span>Info Cuaca</span>
+            </div>
+            <div class="menu-item blue-geo">
+                <i class="fas fa-house-damage"></i>
+                <span>Info Gempa</span>
+            </div>
+            <div class="menu-item blue-geo">
+                <i class="fas fa-moon"></i>
+                <span>Info Hilal</span>
+            </div>
+            <div class="menu-item blue-geo">
+                <i class="fas fa-volcano"></i>
+                <span>Status Gunung</span>
+            </div>
+
+            <div class="menu-item blue-light">
+                <i class="fas fa-pray"></i>
+                <span>Zikir Ultah</span>
+            </div>
+            <div class="menu-item blue-light">
+                <i class="fas fa-tent"></i>
+                <span>Camping & Film</span>
+            </div>
+            <div class="menu-item blue-light">
+                <i class="fas fa-map-marked-alt"></i>
+                <span>Lokasi Farid</span>
+            </div>
+            <div class="menu-item blue-light">
+                <i class="fas fa-birthday-cake"></i>
+                <span>Data Perayaan</span>
+            </div>
+
+            <div class="menu-item gray-blue">
+                <i class="fas fa-share-nodes"></i>
+                <span>Sosial Media</span>
+            </div>
+            <div class="menu-item gray-blue">
+                <i class="fas fa-robot"></i>
+                <span>Karakter Digital</span>
+            </div>
+            <div class="menu-item gray-blue">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Kalender Masehi</span>
+            </div>
+            <div class="menu-item gray-blue">
+                <i class="fas fa-th-large"></i>
+                <span>Apps Lainnya</span>
+            </div>
+        </main>
+
+        <nav class="bottom-nav">
+            <a href="#" class="active"><i class="fas fa-home"></i></a>
+            <a href="#"><i class="fas fa-search"></i></a>
+            <a href="#"><i class="fas fa-bell"></i></a>
+            <a href="#"><i class="fas fa-cog"></i></a>
+        </nav>
+    </div>
+  
+    <div id="feature-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:1000; backdrop-filter: blur(5px);">
+        <div style="background:white; width:90%; max-width:400px; margin:50px auto; border-radius:25px; overflow:hidden; position:relative; animation: slideUp 0.3s ease-out;">
+            <div style="padding:15px 20px; background:#f8fafc; border-bottom:1px solid #eee; display:flex; justify-content:space-between; align-items:center;">
+                <span id="modal-title" style="font-weight:600; color:var(--blue-dark);">Detail</span>
+                <button onclick="closeModal()" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:#666;">&times;</button>
+            </div>
+            <div id="modal-body" style="max-height:70vh; overflow-y:auto;">
+                </div>
+        </div>
+    </div>
+
+<script>
+function updateClock() {
+    const now = new Date();
+    const options = { 
+        timeZone: 'Asia/Makassar', 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit', 
+        hour12: false 
+    };
+    const timeString = new Intl.DateTimeFormat('en-GB', options).format(now);
+    document.getElementById('clock').textContent = timeString;
+    
+    // Update Tanggal Otomatis
+    const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('date').textContent = now.toLocaleDateString('id-ID', dateOptions);
+}
+
+setInterval(updateClock, 1000);
+updateClock();
+
+const modal = document.getElementById('feature-modal');
+const modalTitle = document.getElementById('modal-title');
+const modalBody = document.getElementById('modal-body');  
+
+function openFeature(name) {
+    modal.style.display = 'block';
+    modalTitle.innerText = name;
+    
+    // Reset konten
+    modalBody.innerHTML = '';
+
+    if (name === 'Profil') {
+        modalBody.innerHTML = `
+            <div style="padding:20px; text-align:center;">
+                <div style="width:100px; height:100px; background:linear-gradient(135deg, var(--blue-dark), var(--blue-medium)); border-radius:50%; margin: 0 auto 15px; display:flex; align-items:center; justify-content:center; color:white; font-size:2.5rem; font-weight:bold; border:4px solid #fff; box-shadow:0 5px 15px rgba(0,0,0,0.1);">
+                    FJ
+                </div>
+                <h3 style="margin:0; color:var(--blue-dark);">Farid Jamil</h3>
+                <p style="font-size:0.8rem; color:#666;">Siswa SMAN 2 Aikmel</p>
+                <div style="text-align:left; background:#f0f4f8; padding:15px; border-radius:15px; margin:15px 0; font-size:0.85rem; line-height:1.5;">
+                    Aktif di <b>Komunitas Siswa Menulis (KSM)</b>. Berpengalaman dalam penulisan esai dan menjadi kontributor mading sekolah.
+                </div>
+                <div style="display:flex; justify-content:center; gap:15px; font-size:1.2rem;">
+                    <a href="#" style="color:var(--blue-medium);"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/your-number" style="color:#25d366;"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>`;
+    } else if (name === 'Portofolio') {
+        const linkPDF = "https://drive.google.com/file/d/1p5R2eRnSZWVAVVDRmuub7LD-Wth5ABtz/view"; 
+        modalBody.innerHTML = `
+            <div style="padding:20px;">
+                <p style="font-weight:600; font-size:0.8rem; color:var(--blue-geo); text-transform:uppercase; margin-bottom:10px;">Pengalaman & Lomba</p>
+                <div style="border-left:2px solid var(--blue-medium); padding-left:15px; margin-bottom:15px;">
+                    <p style="margin:0; font-size:0.9rem; font-weight:600;">Finalis Esai Sasambo</p>
+                    <p style="margin:0; font-size:0.75rem; color:#777;">UI Goes to NTB (2019)</p>
+                </div>
+                <div style="border-left:2px solid var(--blue-medium); padding-left:15px; margin-bottom:20px;">
+                    <p style="margin:0; font-size:0.9rem; font-weight:600;">Penulis Mading KSM</p>
+                    <p style="margin:0; font-size:0.75rem; color:#777;">SMAN 2 Aikmel</p>
+                </div>
+                <a href="${linkPDF}" target="_blank" style="display:block; text-align:center; background:var(--blue-dark); color:white; text-decoration:none; padding:12px; border-radius:12px; font-size:0.9rem; font-weight:600;">
+                    <i class="fas fa-download"></i> Unduh CV Lengkap
+                </a>
+            </div>`;
+    } else {
+        modalBody.innerHTML = `<div style="padding:50px; text-align:center; color:#999; font-size:0.8rem;">Konten ${name} akan segera hadir.</div>`;
+    }
+}
+
+function closeModal() {
+    modal.style.display = 'none';
+}
+
+// Menutup modal jika user klik di luar area putih
+window.onclick = function(event) {
+    if (event.target == modal) {
+        closeModal();
+    }
+}
+</script>
+</body>
+</html>
