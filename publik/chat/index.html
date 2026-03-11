@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="index.jpg" rel="icon">
+    <title>Farid Jamil Premium Chat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+:root {
+    --primary-color: #6366f1;
+    --bg-dark: #0f172a;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --text-main: #f8fafc;
+    --text-dim: #94a3b8;
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #0f172a 0%, #1e1e2f 100%);
+    color: var(--text-main);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.app-wrapper {
+    width: 100%;
+    max-width: 500px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(20px);
+    position: relative;
+}
+
+/* Header */
+.app-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--glass-border);
+    background: rgba(15, 23, 42, 0.6);
+}
+
+.user-info { display: flex; align-items: center; gap: 12px; }
+
+.avatar {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(45deg, var(--primary-color), #a855f7);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.status-group h1 { font-size: 1rem; margin: 0; }
+.status { font-size: 0.75rem; color: #10b981; display: flex; align-items: center; gap: 4px; }
+.status i { font-size: 6px; }
+
+.header-actions button {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-left: 15px;
+    transition: 0.3s;
+}
+
+.header-actions button:hover { color: var(--text-main); }
+.header-actions button.danger:hover { color: #ef4444; }
+
+/* Chat Area */
+.chat-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    scroll-behavior: smooth;
+}
+
+.welcome-badge {
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    background: var(--card-bg);
+    padding: 8px 15px;
+    border-radius: 20px;
+    align-self: center;
+    margin-bottom: 20px;
+}
+
+/* Message Bubble */
+.message {
+    max-width: 85%;
+    align-self: flex-end;
+    background: var(--primary-color);
+    padding: 12px 16px;
+    border-radius: 18px 18px 4px 18px;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.message p { margin: 0; line-height: 1.5; font-size: 0.95rem; }
+.timestamp {
+    display: block;
+    font-size: 0.65rem;
+    margin-top: 5px;
+    opacity: 0.7;
+    text-align: right;
+}
+
+/* Input Area */
+.input-area {
+    padding: 20px;
+    background: transparent;
+}
+
+.input-wrapper {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    padding: 8px 8px 8px 20px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+}
+
+#message-input {
+    flex: 1;
+    background: none;
+    border: none;
+    color: white;
+    outline: none;
+    font-size: 0.95rem;
+}
+
+#send-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#send-btn:hover { transform: scale(1.05); background: #4f46e5; }
+
+/* Custom Scrollbar */
+.chat-area::-webkit-scrollbar { width: 4px; }
+.chat-area::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="app-wrapper">
+        <header class="app-header">
+            <div class="user-info">
+                <div class="avatar">FJ</div>
+                <div class="status-group">
+                    <h1>Farid Jamil Chat</h1>
+                    <span class="status"><i class="fa-solid fa-circle"></i> Personal Cloud</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button onclick="downloadMessages()" title="Simpan Chat"><i class="fa-solid fa-download"></i></button>
+                <button onclick="clearMessages()" class="danger" title="Hapus Semua"><i class="fa-solid fa-trash-can"></i></button>
+            </div>
+        </header>
+
+        <main class="chat-area" id="chat-container">
+            <div class="welcome-badge">
+                <i class="fa-solid fa-lock"></i> Pesan dienkripsi secara lokal di browser Anda
+            </div>
+            </main>
+
+        <footer class="input-area">
+            <form id="message-form" class="input-wrapper">
+                <input type="text" id="message-input" placeholder="Tulis catatan..." autocomplete="off">
+                <button type="submit" id="send-btn">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </form>
+        </footer>
+    </div>
+
+    <script>
+function getCurrentTime() {
+    const now = new Date();
+    return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
+function createMessageElement(messageText, timestamp) {
+    const div = document.createElement("div");
+    div.classList.add("message");
+    div.innerHTML = `
+        <p>${messageText}</p>
+        <span class="timestamp">${timestamp}</span>
+    `;
+    return div;
+}
+
+function scrollToBottom() {
+    const container = document.getElementById("chat-container");
+    container.scrollTop = container.scrollHeight;
+}
+
+function saveMessage(message, timestamp) {
+    const chat = JSON.parse(localStorage.getItem("chatMessages")) || [];
+    chat.push({ message, timestamp });
+    localStorage.setItem("chatMessages", JSON.stringify(chat));
+}
+
+function loadMessages() {
+    const chat = JSON.parse(localStorage.getItem("chatMessages")) || [];
+    const container = document.getElementById("chat-container");
+    chat.forEach(entry => {
+        container.appendChild(createMessageElement(entry.message, entry.timestamp));
+    });
+    scrollToBottom();
+}
+
+function clearMessages() {
+    if (confirm("Hapus semua catatan? Tindakan ini tidak bisa dibatalkan.")) {
+        localStorage.removeItem("chatMessages");
+        location.reload();
+    }
+}
+
+function downloadMessages() {
+    const chat = JSON.parse(localStorage.getItem("chatMessages")) || [];
+    if (chat.length === 0) return alert("Belum ada pesan.");
+
+    let content = "--- FARID JAMIL PRIVATE NOTES ---\n\n";
+    chat.forEach(entry => {
+        content += `[${entry.timestamp}] Admin: ${entry.message}\n`;
+    });
+
+    const blob = new Blob([content], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `Notes_${new Date().toISOString().slice(0,10)}.txt`;
+    a.click();
+}
+
+document.getElementById("message-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const input = document.getElementById("message-input");
+    const text = input.value.trim();
+
+    if (text !== "") {
+        const time = getCurrentTime();
+        const element = createMessageElement(text, time);
+        document.getElementById("chat-container").appendChild(element);
+        saveMessage(text, time);
+        input.value = "";
+        scrollToBottom();
+    }
+});
+
+window.onload = loadMessages;
+    </script>
+</body>
+</html>
