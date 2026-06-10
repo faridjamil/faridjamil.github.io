@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>/* Palet Warna Cerah Modis */
+:root {
+    --primary-color: #7B68EE; /* Biru Ungu Cerah */
+    --secondary-color: #FF69B4; /* Pink Cerah/Hot Pink */
+    --background-light: #F0F8FF; /* Background Sangat Terang */
+    --bubble-sent: #e0f7fa; /* Biru Muda Pastel */
+    --bubble-received: #FFFACD; /* Kuning Pucat Pastel */
+    --text-dark: #333;
+    --text-light: #fff;
+    --shadow-effect: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: var(--text-dark);
+}
+
+/* 📱 Kontainer Utama (Mirip Tampilan Mobile) 📱 */
+.chat-container {
+    width: 100%;
+    max-width: 450px; /* Lebar khas mobile */
+    height: 100vh; /* Tinggi penuh untuk tampilan mobile */
+    max-height: 900px;
+    background-color: white;
+    box-shadow: var(--shadow-effect);
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/* ⬆️ HEADER ⬆️ */
+.chat-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--text-light);
+    padding: 15px 20px;
+    box-shadow: var(--shadow-effect);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-icon {
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 2px solid white;
+}
+
+.username {
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+/* 💬 AREA CHAT UTAMA 💬 */
+.chat-main {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background-color: var(--background-light);
+}
+
+/* Gaya Pesan */
+.message {
+    display: flex;
+    margin-bottom: 15px;
+    align-items: flex-end;
+}
+
+.message-bubble {
+    padding: 10px 15px;
+    border-radius: 20px;
+    max-width: 75%;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.message-time {
+    font-size: 0.75em;
+    color: #999;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+/* Pesan Diterima (Kiri) */
+.message.received {
+    justify-content: flex-start;
+}
+
+.message.received .message-bubble {
+    background-color: var(--bubble-received);
+    border-top-left-radius: 5px; /* Sedikit sentuhan unik */
+}
+
+/* Pesan Terkirim (Kanan) */
+.message.sent {
+    justify-content: flex-end;
+}
+
+.message.sent .message-bubble {
+    background-color: var(--bubble-sent);
+    color: var(--text-dark);
+    border-top-right-radius: 5px; /* Sedikit sentuhan unik */
+    order: 2; /* Pindah bubble ke kanan */
+}
+
+.message.sent .message-time {
+    order: 1; /* Pindah waktu ke kiri */
+    margin-right: 10px;
+    margin-left: 0;
+}
+
+/* ⬇️ FOOTER (Input) ⬇️ */
+.chat-footer {
+    display: flex;
+    padding: 10px 15px;
+    background-color: white;
+    border-top: 1px solid #eee;
+    align-items: center;
+}
+
+#message-input {
+    flex-grow: 1;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 30px;
+    background-color: var(--background-light);
+    margin: 0 10px;
+    font-size: 1em;
+    outline: none;
+    transition: box-shadow 0.3s ease;
+}
+
+#message-input:focus {
+    box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+/* Tombol */
+.icon-button, .send-button {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: var(--primary-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.send-button {
+    background-color: var(--secondary-color);
+    color: var(--text-light);
+}
+
+.send-button:hover {
+    background-color: var(--primary-color);
+}
+
+.icon-button:hover {
+    background-color: rgba(123, 104, 238, 0.1);
+}</style>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App Modis</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div class="chat-container">
+
+        <header class="chat-header">
+            <div class="header-content">
+                <i class="fas fa-arrow-left header-icon"></i>
+                <div class="profile-info">
+                    <img src="https://via.placeholder.com/40/FF5733/FFFFFF?text=A" alt="Avatar" class="avatar">
+                    <span class="username">Pengguna Modis</span>
+                </div>
+                <i class="fas fa-ellipsis-v header-icon"></i>
+            </div>
+        </header>
+        <main class="chat-main" id="chat-main">
+            <div class="message received">
+                <div class="message-bubble">Halo! Ini tampilan chat modern dan cerah. 👋</div>
+                <span class="message-time">09:00</span>
+            </div>
+
+            <div class="message sent">
+                <div class="message-bubble">Keren! Saya suka desainnya yang interaktif dan modis. 👍</div>
+                <span class="message-time">09:01</span>
+            </div>
+        </main>
+        <footer class="chat-footer">
+            <button class="icon-button"><i class="fas fa-plus"></i></button>
+            <input type="text" id="message-input" placeholder="Ketik pesan..." aria-label="Ketik pesan" autofocus>
+            <button class="send-button" id="send-button"><i class="fas fa-paper-plane"></i></button>
+        </footer>
+        </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<script>document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('message-input');
+    const sendButton = document.getElementById('send-button');
+    const chatMain = document.getElementById('chat-main');
+
+    // Fungsi untuk membuat elemen pesan baru
+    function createMessageElement(text, type) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', type);
+
+        const bubble = document.createElement('div');
+        bubble.classList.add('message-bubble');
+        bubble.textContent = text;
+
+        const time = document.createElement('span');
+        time.classList.add('message-time');
+        // Mendapatkan waktu saat ini dalam format HH:MM
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        time.textContent = `${hours}:${minutes}`;
+
+        messageDiv.appendChild(bubble);
+        messageDiv.appendChild(time);
+
+        return messageDiv;
+    }
+
+    // Fungsi untuk mengirim pesan
+    function sendMessage() {
+        const messageText = input.value.trim();
+
+        if (messageText !== '') {
+            // 1. Tambahkan pesan ke area chat sebagai 'sent'
+            const newMessage = createMessageElement(messageText, 'sent');
+            chatMain.appendChild(newMessage);
+
+            // 2. Kosongkan input
+            input.value = '';
+
+            // 3. Gulir ke bawah agar pesan baru terlihat
+            scrollToBottom();
+            
+            // Opsional: Simulasi balasan (delay)
+            setTimeout(simulateReply, 1000, messageText);
+        }
+    }
+
+    // Fungsi untuk menggulir ke bawah
+    function scrollToBottom() {
+        chatMain.scrollTop = chatMain.scrollHeight;
+    }
+
+    // Simulasi balasan dari pengguna lain
+    function simulateReply(originalMsg) {
+        let replyText = "Terima kasih atas pesannya!";
+        
+        if (originalMsg.toLowerCase().includes('desain')) {
+            replyText = "Kami senang Anda menyukai desainnya yang cerah dan modern! ✨";
+        }
+        
+        const replyMessage = createMessageElement(replyText, 'received');
+        chatMain.appendChild(replyMessage);
+        
+        scrollToBottom();
+    }
+
+    // Event listener untuk tombol kirim
+    sendButton.addEventListener('click', sendMessage);
+
+    // Event listener untuk tombol Enter pada input
+    input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    });
+
+    // Gulir ke bawah saat halaman dimuat untuk melihat contoh pesan
+    scrollToBottom();
+});</script>
+</body>
+</html>
